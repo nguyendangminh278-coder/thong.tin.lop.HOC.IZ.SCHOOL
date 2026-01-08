@@ -169,7 +169,6 @@
         }
         .info-card:hover::after { color: var(--primary-red); right: 10px; }
 
-
         /* Animation & Responsive */
         .animate-init { animation: fadeUp 0.8s ease forwards; opacity: 0; }
         .animate-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -239,6 +238,15 @@
 
         const CLASSES = [
             {
+                id: "izxps2k9",
+                btnName: "Lớp IZ.XPS2K9<br>(lớp đầu tiên)",
+                title: "Thông tin lớp IZ.XPS2K9 (lớp đầu tiên)",
+                info: [
+                    { title: "Nhóm Zalo chính IZ.XPS2K9", desc: "(Thông báo lịch học, link zoom và chỉ ac quản lí nhắn)", link: "https://zalo.me/g/nydcue584" },
+                    { title: "Link kích hoạt khóa học IZ.XPS2K9", desc: "(Bài giảng xem lại - Tài liệu lớp học hàng ngày và Thực chiến đề thi hàng tuần)", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa" }
+                ]
+            },
+            {
                 id: "bk01",
                 btnName: "Lớp Xuất phát sớm BK01<br>(học từ tháng 04)",
                 title: "Thông tin lớp Xuất phát sớm BK01 (học từ tháng 04)",
@@ -277,7 +285,6 @@
                 title: "Thông tin lớp Cấp tốc BK04 (học từ tháng 1)",
                 info: [
                     { title: "Nhóm Zalo chính BK04", desc: "(Thông báo lịch học, link zoom và chỉ ac quản lí nhắn)", link: "https://zalo.me/g/byhckh860" },
-                    // CẬP NHẬT LINK BK04
                     { title: "Link kích hoạt khóa học BK04", desc: "(Bài giảng xem lại - Tài liệu lớp học hàng ngày và Thực chiến đề thi hàng tuần)", link: "https://hociz.vn/khoa-hoc/lop-ct01-tsa2k8-luyen-de-thuc-chien-phong-thi" },
                     { title: "Nhóm Zalo trợ giảng BK04", desc: "(Hỏi đáp anh chị trợ giảng, thông tin anh chị trợ giảng đã được ghim trên tin nhắn - hỏi đáp thông tin chưa hiểu)", link: "https://zalo.me/g/pszcke881" }
                 ]
@@ -296,7 +303,6 @@
             `;
         };
 
-        // RENDER MỚI: KÍCH HOẠT LỚP HỌC
         const renderActivationSection = (el) => {
             el.innerHTML = `
                 <h3 class="section-title">Kích hoạt lớp học của bạn</h3>
@@ -394,11 +400,10 @@
             container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         };
 
-        // Init App
         document.addEventListener("DOMContentLoaded", () => {
             const renderMap = {
                 'renderSearchSection': renderSearchSection,
-                'renderActivationSection': renderActivationSection, // Đã thêm vào Map
+                'renderActivationSection': renderActivationSection,
                 'renderContactSection': renderContactSection,
                 'renderGiftSection': renderGiftSection,
                 'renderClassSection': renderClassSection
