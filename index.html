@@ -130,6 +130,14 @@
             display: flex; align-items: center; justify-content: center;
             cursor: pointer;
         }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--radius-md);
+        }
         .video-placeholder-content {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -326,10 +334,16 @@
                 <p class="section-desc">Xem video để nắm rõ quy trình lớp học</p>
             </div>
             <div class="video-wrapper">
-                <div class="video-placeholder-content">
-                    <i class="fa-solid fa-play play-icon"></i>
-                    <p>Video đang được cập nhật...</p>
-                </div>
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/2VmwoWElaKE" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </section>
 
@@ -489,7 +503,7 @@
                 fullTitle: "Lớp Luyện Đề Cấp Tốc TSA Plus (CT02)",
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/uvhcma723", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/ct02-tsa-khoa-luyen-de-cap-toc-tsa-plus-%E2%80%93-master-zoom", icon: "fa-laptop-code" },
+                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/tsa-plus-khoa-luyen-de-cap-toc-tsa-plus-%E2%80%93-master-zoom", icon: "fa-laptop-code" },
                     { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với anh chị TG", link: "https://zalo.me/g/zbegoz945", icon: "fa-circle-question" }
                 ]
             }
