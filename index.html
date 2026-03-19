@@ -16,7 +16,7 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary-color: #a80000; /* Đỏ Bách Khoa đậm hơn chút cho sang */
+            --primary-color: #a80000; 
             --primary-light: #d60000;
             --primary-bg-subtle: #fff0f0;
             --text-heading: #1a202c;
@@ -45,7 +45,7 @@
 
         /* --- LAYOUT UTILS --- */
         .container {
-            max-width: 800px; /* Thu hẹp lại để dễ đọc hơn */
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -73,7 +73,7 @@
             background-image: url('https://raw.githubusercontent.com/nguyendangminh278-coder/thong.tin.lop.HOC.IZ.SCHOOL/c76e6e0eb99c947324a0ccb01ff4cef0d4520b9b/dhbkhn-6920-1658994052-1-16702134834751920701721.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.15; /* Làm mờ ảnh nền */
+            opacity: 0.15;
             mix-blend-mode: overlay;
         }
 
@@ -98,7 +98,7 @@
             letter-spacing: 0.5px; 
             margin-bottom: 5px; 
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            color: #ffffff; /* Đã đổi sang màu trắng */
+            color: #ffffff;
         }
         .sub-title { font-size: 1rem; font-weight: 500; opacity: 0.9; color: #ffffff; }
 
@@ -122,7 +122,7 @@
         /* --- VIDEO AREA --- */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             background: #e2e8f0;
             border-radius: var(--radius-md);
@@ -138,13 +138,6 @@
             height: 100%;
             border-radius: var(--radius-md);
         }
-        .video-placeholder-content {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: #718096; transition: var(--transition);
-        }
-        .video-wrapper:hover .video-placeholder-content { background: rgba(0,0,0,0.05); color: var(--primary-color); }
-        .play-icon { font-size: 3rem; margin-bottom: 10px; color: var(--primary-color); }
 
         /* --- BUTTONS & CTA --- */
         .btn-cta {
@@ -152,7 +145,7 @@
             background: var(--primary-color);
             color: white;
             padding: 14px 24px;
-            border-radius: 50px; /* Pill shape */
+            border-radius: 50px;
             font-weight: 600;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
@@ -171,27 +164,15 @@
             display: flex;
             overflow-x: auto;
             gap: 15px;
-            padding: 10px 5px 20px 5px; /* Bottom padding for shadow */
+            padding: 10px 5px 20px 5px;
             scroll-snap-type: x mandatory;
-            scrollbar-width: thin; /* Firefox: Hiện thanh cuộn mỏng */
+            scrollbar-width: thin;
             scrollbar-color: var(--primary-color) #e2e8f0;
         }
-        /* Custom Scrollbar cho Webkit (Chrome, Safari, Edge) */
-        .contact-scroll-wrapper::-webkit-scrollbar { 
-            height: 6px; 
-            display: block; /* Hiện thanh cuộn */
-        }
-        .contact-scroll-wrapper::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-            border-radius: 4px;
-        }
-        .contact-scroll-wrapper::-webkit-scrollbar-thumb {
-            background: #ccc; 
-            border-radius: 4px;
-        }
-        .contact-scroll-wrapper::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-color); 
-        }
+        .contact-scroll-wrapper::-webkit-scrollbar { height: 6px; }
+        .contact-scroll-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .contact-scroll-wrapper::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .contact-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
 
         .contact-item {
             flex: 0 0 260px;
@@ -237,7 +218,6 @@
             transition: var(--transition);
             position: relative;
         }
-        .class-tab:hover { border-color: #cbd5e0; background: #f8fafc; }
         .class-tab.active {
             border-color: var(--primary-color);
             background: var(--primary-bg-subtle);
@@ -258,7 +238,6 @@
             border-radius: var(--radius-md);
             padding: 20px;
             border: 1px solid var(--border-color);
-            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
             animation: fadeIn 0.4s ease;
         }
         .class-content-header {
@@ -285,30 +264,25 @@
             flex-shrink: 0; width: 40px; height: 40px; 
             background: #edf2f7; border-radius: 8px; color: var(--text-heading);
             display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-            transition: var(--transition);
         }
-        .resource-link:hover .res-icon { background: var(--primary-color); color: white; }
         .res-info { flex: 1; }
         .res-title { font-weight: 700; color: var(--text-heading); font-size: 0.95rem; margin-bottom: 3px; display: block; }
         .res-desc { font-size: 0.85rem; color: #718096; line-height: 1.4; }
 
         /* --- FOOTER --- */
         .footer { text-align: center; padding: 40px 20px; color: #718096; font-size: 0.85rem; }
-        .footer p { margin-bottom: 5px; }
 
         /* --- ANIMATIONS --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-up { animation: fadeIn 0.6s ease forwards; opacity: 0; }
 
-        /* --- RESPONSIVE --- */
         @media (min-width: 640px) {
             .action-grid { grid-template-columns: 1fr 1fr; }
             .class-selector { grid-template-columns: repeat(2, 1fr); }
             .main-title { font-size: 2.2rem; }
-            .class-selector { gap: 15px; }
         }
         @media (min-width: 768px) {
-            .class-selector { grid-template-columns: repeat(3, 1fr); } /* More columns on larger screens */
+            .class-selector { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
@@ -349,8 +323,7 @@
 
         <!-- Search & Activation Grid -->
         <div class="action-grid animate-up" style="animation-delay: 0.3s;">
-            <!-- Tra cứu -->
-            <section class="card" style="margin-bottom: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <section class="card" style="margin-bottom: 0;">
                 <div class="section-header">
                     <h3 class="section-title"><i class="fa-solid fa-magnifying-glass"></i> Tra SBD & Mã</h3>
                     <p class="section-desc">Dùng mã vận đơn, đặt tên Zoom</p>
@@ -360,8 +333,7 @@
                 </a>
             </section>
 
-            <!-- Kích hoạt -->
-            <section class="card" style="margin-bottom: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <section class="card" style="margin-bottom: 0;">
                 <div class="section-header">
                     <h3 class="section-title"><i class="fa-solid fa-key"></i> Kích hoạt lớp</h3>
                     <p class="section-desc">Nhập mã kích hoạt khóa học của bạn</p>
@@ -372,7 +344,6 @@
             </section>
         </div>
         
-        <!-- Spacer -->
         <div style="height: 25px;"></div>
 
         <!-- Contact Section -->
@@ -393,32 +364,11 @@
         <section class="card animate-up" style="animation-delay: 0.5s;">
             <div class="section-header">
                 <h3 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Bạn thuộc lớp nào?</h3>
-                <p class="section-desc">Chọn lớp của bạn để lấy thông tin nhóm Zalo & Tài liệu</p>
+                <p class="section-desc">Chọn lớp để lấy thông tin nhóm Zalo & Tài liệu</p>
             </div>
             
-            <div id="class-selector" class="class-selector">
-                <!-- JS render buttons -->
-            </div>
-            
-            <div id="class-detail-panel">
-                <!-- JS render content -->
-            </div>
-        </section>
-
-        <!-- Gift Section -->
-        <section class="card animate-up" style="animation-delay: 0.6s; background: linear-gradient(to right, #fff5f5, #fff);">
-            <div class="section-header">
-                <h3 class="section-title"><i class="fa-solid fa-gift"></i> Tra cứu quà tặng</h3>
-                <p class="section-desc">Kiểm tra vận đơn sách & quà tặng kèm</p>
-            </div>
-            <div class="action-grid">
-                <a href="https://viettelpost.com.vn/" target="_blank" class="btn-cta btn-outline" style="border-width: 1px; font-size: 0.9rem;">
-                    <i class="fa-solid fa-truck"></i> Tra ViettelPost
-                </a>
-                <a href="https://hociz.vn/tra-so-bao-danh" target="_blank" class="btn-cta btn-outline" style="border-width: 1px; font-size: 0.9rem;">
-                    <i class="fa-solid fa-gift"></i> Mã quà tặng
-                </a>
-            </div>
+            <div id="class-selector" class="class-selector"></div>
+            <div id="class-detail-panel"></div>
         </section>
 
         <footer class="footer">
@@ -430,10 +380,12 @@
     <script>
         /** --- DATA SOURCE --- */
         const CONTACTS = [
-            { name: "Chị Linh", role: "Quản lí lớp", desc: "Bảo mẫu lớp", phone: "0349195627", link: "https://zalo.me/0349195627", icon: "fa-user-gear" },
+            { name: "A. Đăng Khoa", role: "Quản lí lớp", desc: "Bảo mẫu lớp", phone: "0949575817", link: "https://zalo.me/0949575817", icon: "fa-user-gear" },
+            { name: "A. Trì", role: "Vận chuyển", desc: "Sách & Quà tặng", phone: "0334642345", link: "https://zalo.me/0334642345", icon: "fa-truck-fast" },
             { name: "Chị Nguyệt", role: "Lead Truyền Thông", desc: "Ebook - Live FB", phone: "0346597853", link: "https://zalo.me/0346597853", icon: "fa-bullhorn" },
             { name: "A. Minh Hiếu", role: "Trợ Giảng Lý", desc: "Lead trợ giảng", phone: "0865457756", link: "https://zalo.me/0865457756", icon: "fa-bolt" },
-            { name: "A. Bá Lương", role: "Trợ Giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0966239805", link: "https://zalo.me/0966239805", icon: "fa-calculator" },
+            { name: "Trương Mỹ Tâm", role: "Trợ giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0976189413", link: "https://zalo.me/0976189413", icon: "fa-calculator" },
+            { name: "Hà Anh Vũ", role: "Trợ giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0388615499", link: "https://zalo.me/0388615499", icon: "fa-calculator" },
             { name: "C. Thanh Ngoan", role: "Trợ Giảng Sinh", desc: "Hỗ trợ môn Sinh", phone: "0352182712", link: "https://zalo.me/0352182712", icon: "fa-dna" },
             { name: "C. Nguyễn Thùy", role: "Trợ Giảng Hóa", desc: "Hỗ trợ môn Hóa", phone: "0942512169", link: "https://zalo.me/0942512169", icon: "fa-flask" },
         ];
@@ -445,8 +397,8 @@
                 subText: "Lớp đầu tiên",
                 fullTitle: "Thông tin lớp IZ.XPS2K9",
                 info: [
-                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom (Chỉ Admin nhắn)", link: "https://zalo.me/g/nydcue584", icon: "fa-comments" },
-                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu & đề thi", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" }
+                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/nydcue584", icon: "fa-comments" },
+                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" }
                 ]
             },
             {
@@ -457,8 +409,7 @@
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/trmfqe629", icon: "fa-comments" },
                     { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k8tsabk01-xps-danh-gia-tu-duy-dai-hoc-bach-khoa-ha-noi-tsa-2026", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với anh chị TG", link: "https://zalo.me/g/jdkzvv166", icon: "fa-circle-question" },
-                    { title: "Nhóm Phụ Huynh", desc: "Gửi cho bố mẹ tham gia", link: "https://zalo.me/g/omyzgk581", icon: "fa-users" }
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/jdkzvv166", icon: "fa-circle-question" }
                 ]
             },
             {
@@ -469,8 +420,7 @@
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/uddxgl510", icon: "fa-comments" },
                     { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k8tsabk02-xps-danh-gia-tu-duy-dai-hoc-bach-khoa-ha-noi-tsa-2026", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với anh chị TG", link: "https://zalo.me/g/rfywhg727", icon: "fa-circle-question" },
-                    { title: "Nhóm Phụ Huynh", desc: "Gửi cho bố mẹ tham gia", link: "https://zalo.me/g/zzluyr655", icon: "fa-users" }
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/rfywhg727", icon: "fa-circle-question" }
                 ]
             },
             {
@@ -481,8 +431,7 @@
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/gitzyo507", icon: "fa-comments" },
                     { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k8tsabk03-tong-quan-danh-gia-tu-duy-dai-hoc-bach-khoa-ha-noi-tsa-2026", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với anh chị TG", link: "https://zalo.me/g/bmeigk236", icon: "fa-circle-question" },
-                    { title: "Nhóm Phụ Huynh", desc: "Gửi cho bố mẹ tham gia", link: "https://zalo.me/g/nrrqfz855", icon: "fa-users" }
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/bmeigk236", icon: "fa-circle-question" }
                 ]
             },
             {
@@ -493,7 +442,7 @@
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/byhckh860", icon: "fa-comments" },
                     { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/lop-ct01-tsa2k8-luyen-de-thuc-chien-phong-thi", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với anh chị TG", link: "https://zalo.me/g/pszcke881", icon: "fa-circle-question" }
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/pszcke881", icon: "fa-circle-question" }
                 ]
             },
             {
@@ -504,36 +453,27 @@
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/uvhcma723", icon: "fa-comments" },
                     { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/tsa-plus-khoa-luyen-de-cap-toc-tsa-plus-%E2%80%93-master-zoom", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với anh chị TG", link: "https://zalo.me/g/zbegoz945", icon: "fa-circle-question" }
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/zbegoz945", icon: "fa-circle-question" }
                 ]
             }
         ];
 
         /** --- RENDER FUNCTIONS --- */
-        
-        // Render Contacts
         const renderContacts = () => {
             const container = document.getElementById('contact-container');
-            const html = CONTACTS.map(c => `
+            container.innerHTML = CONTACTS.map(c => `
                 <a href="${c.link}" target="_blank" class="contact-item">
-                    <div class="contact-avatar">
-                        <i class="fa-solid ${c.icon}"></i>
-                    </div>
+                    <div class="contact-avatar"><i class="fa-solid ${c.icon}"></i></div>
                     <div class="contact-role">${c.role}</div>
                     <div class="contact-name">${c.name}</div>
                     <div class="contact-desc">${c.desc}</div>
                     <div class="contact-phone"><i class="fa-solid fa-phone"></i> ${c.phone}</div>
                 </a>
             `).join('');
-            container.innerHTML = html;
         };
 
-        // Render Class System
         const renderClassSystem = () => {
             const selectorContainer = document.getElementById('class-selector');
-            const contentPanel = document.getElementById('class-detail-panel');
-
-            // 1. Render Buttons
             selectorContainer.innerHTML = CLASSES.map((c, index) => `
                 <div class="class-tab ${index === 0 ? 'active' : ''}" onclick="selectClass('${c.id}')" id="btn-${c.id}">
                     <span class="class-tab-title">${c.shortName}</span>
@@ -541,40 +481,28 @@
                 </div>
             `).join('');
 
-            // 2. Initial Render of first class
-            if(CLASSES.length > 0) {
-                renderClassContent(CLASSES[0].id);
-            }
+            if(CLASSES.length > 0) renderClassContent(CLASSES[0].id);
         };
 
         window.selectClass = (classId) => {
-            // Update buttons state
             document.querySelectorAll('.class-tab').forEach(el => el.classList.remove('active'));
             document.getElementById(`btn-${classId}`).classList.add('active');
-            
-            // Render content
             renderClassContent(classId);
         };
 
         const renderClassContent = (classId) => {
             const data = CLASSES.find(c => c.id === classId);
             const panel = document.getElementById('class-detail-panel');
-            
             if(!data) return;
 
-            // Generate links html
             const linksHtml = data.info.map(item => `
                 <a href="${item.link}" target="_blank" class="resource-link">
-                    <div class="res-icon">
-                        <i class="fa-solid ${item.icon || 'fa-link'}"></i>
-                    </div>
+                    <div class="res-icon"><i class="fa-solid ${item.icon || 'fa-link'}"></i></div>
                     <div class="res-info">
                         <span class="res-title">${item.title}</span>
                         <span class="res-desc">${item.desc}</span>
                     </div>
-                    <div style="align-self: center; color: #cbd5e0;">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
+                    <div style="align-self: center; color: #cbd5e0;"><i class="fa-solid fa-chevron-right"></i></div>
                 </a>
             `).join('');
 
@@ -584,19 +512,15 @@
                         <i class="fa-solid fa-folder-open class-icon-lg"></i>
                         <span class="class-title-lg">${data.fullTitle}</span>
                     </div>
-                    <div class="class-resources">
-                        ${linksHtml}
-                    </div>
+                    <div class="class-resources">${linksHtml}</div>
                 </div>
             `;
         };
 
-        /** --- INIT --- */
         document.addEventListener('DOMContentLoaded', () => {
             renderContacts();
             renderClassSystem();
         });
-
     </script>
 </body>
 </html>
