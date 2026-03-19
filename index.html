@@ -160,6 +160,31 @@
         .action-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
 
         /* --- CONTACT CAROUSEL --- */
+        .contact-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-body);
+        }
+        .filter-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(168, 0, 0, 0.2);
+        }
+
         .contact-scroll-wrapper {
             display: flex;
             overflow-x: auto;
@@ -168,6 +193,7 @@
             scroll-snap-type: x mandatory;
             scrollbar-width: thin;
             scrollbar-color: var(--primary-color) #e2e8f0;
+            min-height: 220px;
         }
         .contact-scroll-wrapper::-webkit-scrollbar { height: 6px; }
         .contact-scroll-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
@@ -185,6 +211,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow-sm);
+            animation: fadeIn 0.4s ease forwards;
         }
         .contact-item::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary-color);
@@ -352,6 +379,13 @@
                 <h3 class="section-title"><i class="fa-solid fa-headset"></i> Đội ngũ hỗ trợ</h3>
                 <p class="section-desc">Liên hệ trực tiếp qua Zalo các anh chị trợ giảng</p>
             </div>
+
+            <!-- Contact Filters -->
+            <div class="contact-filters">
+                <button class="filter-btn active" onclick="setContactFilter('all', this)">Tất cả</button>
+                <button class="filter-btn" onclick="setContactFilter('assistant', this)">Trợ giảng</button>
+            </div>
+
             <div id="contact-container" class="contact-scroll-wrapper">
                 <!-- JS will inject contents here -->
             </div>
@@ -459,9 +493,16 @@
         ];
 
         /** --- RENDER FUNCTIONS --- */
+        let currentContactFilter = 'all';
+
         const renderContacts = () => {
             const container = document.getElementById('contact-container');
-            container.innerHTML = CONTACTS.map(c => `
+            
+            const filteredData = currentContactFilter === 'all' 
+                ? CONTACTS 
+                : CONTACTS.filter(c => c.role.toLowerCase().includes('trợ giảng'));
+
+            container.innerHTML = filteredData.map(c => `
                 <a href="${c.link}" target="_blank" class="contact-item">
                     <div class="contact-avatar"><i class="fa-solid ${c.icon}"></i></div>
                     <div class="contact-role">${c.role}</div>
@@ -470,6 +511,15 @@
                     <div class="contact-phone"><i class="fa-solid fa-phone"></i> ${c.phone}</div>
                 </a>
             `).join('');
+        };
+
+        window.setContactFilter = (filter, btn) => {
+            currentContactFilter = filter;
+            // Update UI buttons
+            document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+            // Re-render
+            renderContacts();
         };
 
         const renderClassSystem = () => {
