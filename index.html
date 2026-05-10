@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin lớp học - Đánh giá tư duy TSA | HỌC IZ SCHOOL</title>
-    
+
     <!-- Google Fonts: Học thuật & Hiện đại -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary-color: #a80000; 
+            --primary-color: #a80000;
             --primary-light: #d60000;
             --primary-bg-subtle: #fff0f0;
             --text-heading: #1a202c;
@@ -24,15 +27,19 @@
             --bg-body: #f7f9fc;
             --bg-card: #ffffff;
             --border-color: #e2e8f0;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --radius-md: 12px;
             --radius-lg: 16px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Open Sans', sans-serif;
@@ -50,9 +57,20 @@
             padding: 20px;
         }
 
-        h1, h2, h3, h4, .btn-font { font-family: 'Montserrat', sans-serif; color: var(--text-heading); }
-        
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        h1,
+        h2,
+        h3,
+        h4,
+        .btn-font {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-heading);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
 
         /* --- HEADER HERO --- */
         .header-hero {
@@ -69,7 +87,10 @@
 
         .header-bg-image {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('https://raw.githubusercontent.com/nguyendangminh278-coder/thong.tin.lop.HOC.IZ.SCHOOL/c76e6e0eb99c947324a0ccb01ff4cef0d4520b9b/dhbkhn-6920-1658994052-1-16702134834751920701721.jpg');
             background-size: cover;
             background-position: center;
@@ -77,30 +98,47 @@
             mix-blend-mode: overlay;
         }
 
-        .header-content { position: relative; z-index: 1; }
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
 
         .logo-wrapper {
-            width: 110px; height: 110px;
+            width: 110px;
+            height: 110px;
             background: white;
             border-radius: 50%;
             padding: 4px;
             margin: 0 auto 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .logo-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
-        .main-title { 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            margin-bottom: 5px; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        .main-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             color: #ffffff;
         }
-        .sub-title { font-size: 1rem; font-weight: 500; opacity: 0.9; color: #ffffff; }
+
+        .sub-title {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            color: #ffffff;
+        }
 
         /* --- SECTIONS --- */
         .card {
@@ -113,11 +151,31 @@
             transition: var(--transition);
         }
 
-        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
 
-        .section-header { text-align: center; margin-bottom: 20px; }
-        .section-title { font-size: 1.25rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; margin-bottom: 5px; display: inline-flex; align-items: center; gap: 10px; }
-        .section-desc { font-size: 0.9rem; color: #718096; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            color: #718096;
+        }
 
         /* --- VIDEO AREA --- */
         .video-wrapper {
@@ -127,9 +185,12 @@
             background: #e2e8f0;
             border-radius: var(--radius-md);
             overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
         }
+
         .video-wrapper iframe {
             position: absolute;
             top: 0;
@@ -141,7 +202,10 @@
 
         /* --- BUTTONS & CTA --- */
         .btn-cta {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             background: var(--primary-color);
             color: white;
             padding: 14px 24px;
@@ -152,12 +216,31 @@
             box-shadow: 0 4px 6px rgba(168, 0, 0, 0.3);
             transition: var(--transition);
         }
-        .btn-cta:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 6px 12px rgba(168, 0, 0, 0.4); }
-        
-        .btn-outline { background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color); box-shadow: none; }
-        .btn-outline:hover { background: var(--primary-bg-subtle); color: var(--primary-color); transform: translateY(-2px); }
 
-        .action-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .btn-cta:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(168, 0, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-bg-subtle);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
 
         /* --- CONTACT CAROUSEL --- */
         .contact-filters {
@@ -166,6 +249,7 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+
         .filter-btn {
             padding: 8px 16px;
             border-radius: 20px;
@@ -177,7 +261,12 @@
             transition: var(--transition);
             color: var(--text-body);
         }
-        .filter-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
         .filter-btn.active {
             background: var(--primary-color);
             color: white;
@@ -195,10 +284,24 @@
             scrollbar-color: var(--primary-color) #e2e8f0;
             min-height: 220px;
         }
-        .contact-scroll-wrapper::-webkit-scrollbar { height: 6px; }
-        .contact-scroll-wrapper::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
-        .contact-scroll-wrapper::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-        .contact-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
+        .contact-scroll-wrapper::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .contact-scroll-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .contact-scroll-wrapper::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .contact-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
 
         .contact-item {
             flex: 0 0 260px;
@@ -213,28 +316,82 @@
             box-shadow: var(--shadow-sm);
             animation: fadeIn 0.4s ease forwards;
         }
+
         .contact-item::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary-color);
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
         }
-        .contact-item:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: var(--shadow-md); }
-        
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
         .contact-avatar {
-            width: 60px; height: 60px; background: var(--bg-body); border-radius: 50%;
-            margin: 0 auto 10px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: var(--primary-color);
+            width: 60px;
+            height: 60px;
+            background: var(--bg-body);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
         }
-        .contact-role { font-size: 0.75rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
-        .contact-name { font-weight: 700; font-size: 1.1rem; color: var(--text-heading); margin-bottom: 5px; }
-        .contact-desc { font-size: 0.85rem; color: #718096; margin-bottom: 12px; height: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .contact-phone { 
-            background: var(--bg-body); padding: 8px 12px; border-radius: 8px; 
-            font-weight: 600; font-size: 0.9rem; color: var(--text-heading); display: inline-flex; align-items: center; gap: 5px;
+
+        .contact-role {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .contact-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-heading);
+            margin-bottom: 5px;
+        }
+
+        .contact-desc {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 12px;
+            height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .contact-phone {
+            background: var(--bg-body);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-heading);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         /* --- CLASS SELECTION (TAB STYLE) --- */
         .class-selector {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
         }
+
         .class-tab {
             background: white;
             border: 2px solid var(--border-color);
@@ -245,20 +402,44 @@
             transition: var(--transition);
             position: relative;
         }
+
         .class-tab.active {
             border-color: var(--primary-color);
             background: var(--primary-bg-subtle);
             color: var(--primary-color);
         }
+
         .class-tab.active::after {
-            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-            position: absolute; top: -10px; right: -10px;
-            width: 24px; height: 24px; background: var(--primary-color); color: white;
-            border-radius: 50%; font-size: 0.8rem; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .class-tab-title { font-weight: 700; display: block; margin-bottom: 4px; font-size: 1rem; }
-        .class-tab-sub { font-size: 0.8rem; opacity: 0.8; font-weight: 500; }
+
+        .class-tab-title {
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .class-tab-sub {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
 
         .class-content-panel {
             background: #fff;
@@ -267,14 +448,31 @@
             border: 1px solid var(--border-color);
             animation: fadeIn 0.4s ease;
         }
+
         .class-content-header {
-            display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
         }
-        .class-icon-lg { font-size: 1.5rem; color: var(--primary-color); }
-        .class-title-lg { font-size: 1.1rem; font-weight: 700; color: var(--primary-color); }
+
+        .class-icon-lg {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .class-title-lg {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
         .resource-link {
-            display: flex; align-items: flex-start; gap: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
             padding: 15px;
             background: white;
             border: 1px solid var(--border-color);
@@ -282,37 +480,92 @@
             margin-bottom: 12px;
             transition: var(--transition);
         }
+
         .resource-link:hover {
             border-color: var(--primary-color);
             background: var(--primary-bg-subtle);
             transform: translateX(5px);
         }
-        .res-icon { 
-            flex-shrink: 0; width: 40px; height: 40px; 
-            background: #edf2f7; border-radius: 8px; color: var(--text-heading);
-            display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+
+        .res-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: #edf2f7;
+            border-radius: 8px;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
         }
-        .res-info { flex: 1; }
-        .res-title { font-weight: 700; color: var(--text-heading); font-size: 0.95rem; margin-bottom: 3px; display: block; }
-        .res-desc { font-size: 0.85rem; color: #718096; line-height: 1.4; }
+
+        .res-info {
+            flex: 1;
+        }
+
+        .res-title {
+            font-weight: 700;
+            color: var(--text-heading);
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .res-desc {
+            font-size: 0.85rem;
+            color: #718096;
+            line-height: 1.4;
+        }
 
         /* --- FOOTER --- */
-        .footer { text-align: center; padding: 40px 20px; color: #718096; font-size: 0.85rem; }
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #718096;
+            font-size: 0.85rem;
+        }
 
         /* --- ANIMATIONS --- */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-up { animation: fadeIn 0.6s ease forwards; opacity: 0; }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-up {
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+        }
 
         @media (min-width: 640px) {
-            .action-grid { grid-template-columns: 1fr 1fr; }
-            .class-selector { grid-template-columns: repeat(2, 1fr); }
-            .main-title { font-size: 2.2rem; }
+            .action-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .class-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+            }
         }
+
         @media (min-width: 768px) {
-            .class-selector { grid-template-columns: repeat(3, 1fr); }
+            .class-selector {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <main class="container">
@@ -321,7 +574,8 @@
             <div class="header-bg-image"></div>
             <div class="header-content">
                 <div class="logo-wrapper">
-                    <img src="https://raw.githubusercontent.com/nguyendangminh278-coder/thong.tin.lop.HOC.IZ.SCHOOL/c76e6e0eb99c947324a0ccb01ff4cef0d4520b9b/images.png" alt="Logo BK" class="logo-img">
+                    <img src="https://raw.githubusercontent.com/nguyendangminh278-coder/thong.tin.lop.HOC.IZ.SCHOOL/c76e6e0eb99c947324a0ccb01ff4cef0d4520b9b/images.png"
+                        alt="Logo BK" class="logo-img">
                 </div>
                 <h1 class="main-title">Đánh giá tư duy TSA</h1>
                 <p class="sub-title">Cổng thông tin lớp học IZ SCHOOL & Bách Khoa Hà Nội</p>
@@ -335,15 +589,11 @@
                 <p class="section-desc">Xem video để nắm rõ quy trình lớp học</p>
             </div>
             <div class="video-wrapper">
-                <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src="https://drive.google.com/file/d/1JlfooKWyPWbNJxnzV9aFGnC74OE_kcs-/preview" 
-                    title="Google Drive Video Player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
+                <iframe width="100%" height="100%"
+                    src="https://drive.google.com/file/d/1JlfooKWyPWbNJxnzV9aFGnC74OE_kcs-/preview"
+                    title="Google Drive Video Player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                 </iframe>
             </div>
         </section>
@@ -370,7 +620,7 @@
                 </a>
             </section>
         </div>
-        
+
         <div style="height: 25px;"></div>
 
         <!-- Contact Section -->
@@ -400,7 +650,7 @@
                 <h3 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Bạn thuộc lớp nào?</h3>
                 <p class="section-desc">Chọn lớp để lấy thông tin nhóm Zalo & Tài liệu</p>
             </div>
-            
+
             <div id="class-selector" class="class-selector"></div>
             <div id="class-detail-panel"></div>
         </section>
@@ -426,68 +676,25 @@
 
         const CLASSES = [
             {
-                id: "izxps2k9",
-                shortName: "Lớp IZ.XPS2K9",
+                id: "2k9bk01",
+                shortName: "Lớp 2K9.BK01",
                 subText: "Lớp đầu tiên",
-                fullTitle: "Thông tin lớp IZ.XPS2K9",
+                fullTitle: "Thông tin lớp 2K9.BK01",
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/nydcue584", icon: "fa-comments" },
-                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" }
+                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" },
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/uhdxou639", icon: "fa-circle-question" }
                 ]
             },
             {
-                id: "bk01",
-                shortName: "Lớp BK01",
-                subText: "Tháng 04",
-                fullTitle: "Lớp Xuất Phát Sớm BK01",
+                id: "2k9bk02",
+                shortName: "Lớp 2K9.BK02",
+                subText: "TSA 360",
+                fullTitle: "Lớp 2K9.BK02 TSA 360",
                 info: [
-                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/trmfqe629", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k8tsabk01-xps-danh-gia-tu-duy-dai-hoc-bach-khoa-ha-noi-tsa-2026", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/jdkzvv166", icon: "fa-circle-question" }
-                ]
-            },
-            {
-                id: "bk02",
-                shortName: "Lớp BK02",
-                subText: "Tháng 06",
-                fullTitle: "Lớp Xuất Phát Sớm BK02",
-                info: [
-                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/uddxgl510", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k8tsabk02-xps-danh-gia-tu-duy-dai-hoc-bach-khoa-ha-noi-tsa-2026", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/rfywhg727", icon: "fa-circle-question" }
-                ]
-            },
-            {
-                id: "bk03",
-                shortName: "Lớp BK03",
-                subText: "Tháng 10",
-                fullTitle: "Lớp Tổng Ôn BK03",
-                info: [
-                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/gitzyo507", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k8tsabk03-tong-quan-danh-gia-tu-duy-dai-hoc-bach-khoa-ha-noi-tsa-2026", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/bmeigk236", icon: "fa-circle-question" }
-                ]
-            },
-            {
-                id: "bk04",
-                shortName: "Lớp BK04",
-                subText: "Cấp Tốc (T1)",
-                fullTitle: "Lớp Cấp Tốc BK04",
-                info: [
-                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/byhckh860", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/lop-ct01-tsa2k8-luyen-de-thuc-chien-phong-thi", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/pszcke881", icon: "fa-circle-question" }
-                ]
-            },
-            {
-                id: "ct02",
-                shortName: "Lớp CT02",
-                subText: "TSA Plus",
-                fullTitle: "Lớp Luyện Đề Cấp Tốc TSA Plus (CT02)",
-                info: [
-                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/uvhcma723", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/tsa-plus-khoa-luyen-de-cap-toc-tsa-plus-%E2%80%93-master-zoom", icon: "fa-laptop-code" },
-                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/zbegoz945", icon: "fa-circle-question" }
+                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/yuolvyjafxqj0uherdjs", icon: "fa-comments" },
+                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tsa360", icon: "fa-laptop-code" },
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/7xm9qzqu23ik89iyz6ku", icon: "fa-circle-question" }
                 ]
             }
         ];
@@ -497,9 +704,9 @@
 
         const renderContacts = () => {
             const container = document.getElementById('contact-container');
-            
-            const filteredData = currentContactFilter === 'all' 
-                ? CONTACTS 
+
+            const filteredData = currentContactFilter === 'all'
+                ? CONTACTS
                 : CONTACTS.filter(c => c.role.toLowerCase().includes('trợ giảng'));
 
             container.innerHTML = filteredData.map(c => `
@@ -531,7 +738,7 @@
                 </div>
             `).join('');
 
-            if(CLASSES.length > 0) renderClassContent(CLASSES[0].id);
+            if (CLASSES.length > 0) renderClassContent(CLASSES[0].id);
         };
 
         window.selectClass = (classId) => {
@@ -543,7 +750,7 @@
         const renderClassContent = (classId) => {
             const data = CLASSES.find(c => c.id === classId);
             const panel = document.getElementById('class-detail-panel');
-            if(!data) return;
+            if (!data) return;
 
             const linksHtml = data.info.map(item => `
                 <a href="${item.link}" target="_blank" class="resource-link">
@@ -573,4 +780,5 @@
         });
     </script>
 </body>
+
 </html>
