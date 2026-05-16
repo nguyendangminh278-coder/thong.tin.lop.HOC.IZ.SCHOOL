@@ -518,6 +518,187 @@
             line-height: 1.4;
         }
 
+
+
+        /* --- WEEKLY SCHEDULE --- */
+        .schedule-section {
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .schedule-topline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .schedule-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            color: var(--text-heading);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+
+        .schedule-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: #edf2f7;
+            color: #4a5568;
+            font-size: 0.72rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .schedule-note {
+            font-size: 0.82rem;
+            color: #718096;
+            margin-bottom: 12px;
+        }
+
+        .schedule-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: white;
+        }
+
+        .schedule-table {
+            width: 100%;
+            min-width: 720px;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.86rem;
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        .schedule-table th:last-child,
+        .schedule-table td:last-child {
+            border-right: none;
+        }
+
+        .schedule-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .schedule-table thead th {
+            background: #f8fafc;
+            color: var(--text-heading);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .schedule-time {
+            width: 110px;
+            font-weight: 800;
+            color: var(--primary-color);
+            background: #fffafa;
+            text-align: center !important;
+            white-space: nowrap;
+        }
+
+        .schedule-empty-cell {
+            color: #cbd5e0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .schedule-lesson {
+            display: block;
+            padding: 9px 10px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #edf2f7;
+            margin-bottom: 8px;
+        }
+
+        .schedule-lesson:last-child {
+            margin-bottom: 0;
+        }
+
+        .schedule-subject {
+            display: block;
+            font-weight: 800;
+            color: var(--text-heading);
+            line-height: 1.35;
+        }
+
+        .schedule-teacher {
+            display: block;
+            margin-top: 3px;
+            color: #718096;
+            font-size: 0.8rem;
+            line-height: 1.35;
+        }
+
+        .today-col {
+            background: linear-gradient(180deg, #fff3f3 0%, #ffe1e1 100%) !important;
+            color: var(--primary-color) !important;
+            position: relative;
+        }
+
+        .today-col::after {
+            content: 'Hôm nay';
+            display: block;
+            width: fit-content;
+            margin: 4px auto 0;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.65rem;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            text-transform: none;
+        }
+
+        .today-cell {
+            background: #fffafa;
+            box-shadow: inset 3px 0 0 var(--primary-color);
+        }
+
+        .today-cell .schedule-lesson {
+            background: var(--primary-bg-subtle);
+            border-color: rgba(168, 0, 0, 0.28);
+            box-shadow: 0 4px 10px rgba(168, 0, 0, 0.08);
+        }
+
+        .schedule-state {
+            border: 1px dashed var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            background: #f8fafc;
+            color: #718096;
+            font-size: 0.88rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .schedule-state i {
+            color: var(--primary-color);
+            margin-top: 3px;
+        }
+
         /* --- FOOTER --- */
         .footer {
             text-align: center;
@@ -663,6 +844,9 @@
 
     <script>
         /** --- DATA SOURCE --- */
+        const SCHEDULE_API_URL = "https://script.google.com/macros/s/AKfycbx-Dp_QVStPJ-zD2Cwd7y0mK26btDAqV4sVn6XUEbLFTR0sbAarrmaYY8oASWUXAzNw/exec";
+        const DAY_ORDER = ["THỨ 2", "THỨ 3", "THỨ 4", "THỨ 5", "THỨ 6", "THỨ 7", "CHỦ NHẬT"];
+
         const CONTACTS = [
             { name: "A. Đăng Khoa", role: "Quản lí lớp", desc: "Bảo mẫu lớp", phone: "0949575817", link: "https://zalo.me/0949575817", icon: "fa-user-gear" },
             { name: "A. Trì", role: "Vận chuyển", desc: "Sách & Quà tặng", phone: "0334642345", link: "https://zalo.me/0334642345", icon: "fa-truck-fast" },
@@ -677,6 +861,7 @@
         const CLASSES = [
             {
                 id: "2k9bk01",
+                scheduleCode: "TSA01",
                 shortName: "Lớp 2K9.BK01",
                 subText: "Lớp đầu tiên",
                 fullTitle: "Thông tin lớp 2K9.BK01",
@@ -688,6 +873,7 @@
             },
             {
                 id: "2k9bk02",
+                scheduleCode: "TSA02",
                 shortName: "Lớp 2K9.BK02",
                 subText: "TSA 360",
                 fullTitle: "Lớp 2K9.BK02 TSA 360",
@@ -699,9 +885,224 @@
             }
         ];
 
-        /** --- RENDER FUNCTIONS --- */
+        /** --- STATE --- */
         let currentContactFilter = 'all';
+        let currentSelectedClassId = CLASSES[0]?.id || null;
+        let schedulesByClass = {};
+        let scheduleLoadState = { loading: true, error: '' };
 
+        /** --- HELPERS --- */
+        const escapeHTML = (value) => String(value ?? '')
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+
+        const removeVietnameseMarks = (value) => String(value ?? '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd')
+            .replace(/Đ/g, 'D');
+
+        const getField = (obj, keys) => {
+            for (const key of keys) {
+                if (obj && obj[key] !== undefined && obj[key] !== null && String(obj[key]).trim() !== '') return obj[key];
+            }
+            return '';
+        };
+
+        const normalizeDay = (rawDay) => {
+            const original = String(rawDay ?? '').trim().toUpperCase();
+            const plain = removeVietnameseMarks(original).replace(/\s+/g, ' ').trim();
+
+            if (!plain) return '';
+            if (plain.includes('CHU NHAT') || plain === 'CN' || plain.includes('SUNDAY')) return 'CHỦ NHẬT';
+
+            const thuMatch = plain.match(/THU\s*([2-7])/);
+            if (thuMatch) return `THỨ ${thuMatch[1]}`;
+
+            const numberMatch = plain.match(/\b([2-7])\b/);
+            if (numberMatch) return `THỨ ${numberMatch[1]}`;
+
+            const englishMap = {
+                MONDAY: 'THỨ 2',
+                TUESDAY: 'THỨ 3',
+                WEDNESDAY: 'THỨ 4',
+                THURSDAY: 'THỨ 5',
+                FRIDAY: 'THỨ 6',
+                SATURDAY: 'THỨ 7'
+            };
+            return englishMap[plain] || original;
+        };
+
+        const normalizeClassCode = (rawCode) => {
+            const value = removeVietnameseMarks(String(rawCode ?? '')).toUpperCase().replace(/[\s._-]/g, '');
+            if (!value) return '';
+            if (value.includes('TSA01') || value.endsWith('BK01') || value === '01') return 'TSA01';
+            if (value.includes('TSA02') || value.endsWith('BK02') || value === '02') return 'TSA02';
+            return value;
+        };
+
+        const getTodayDayName = () => {
+            const today = new Date().getDay();
+            return today === 0 ? 'CHỦ NHẬT' : `THỨ ${today + 1}`;
+        };
+
+        const extractRawScheduleRows = (payload) => {
+            const data = Array.isArray(payload)
+                ? payload
+                : payload?.data || payload?.schedule || payload?.schedules || payload?.records || payload?.rows || [];
+
+            if (!Array.isArray(data)) return [];
+
+            // Hỗ trợ cả JSON object và dạng mảng 2 chiều [header, ...rows].
+            if (Array.isArray(data[0])) {
+                const headers = data[0].map(h => String(h || '').trim());
+                return data.slice(1).map(row => headers.reduce((acc, header, index) => {
+                    if (header) acc[header] = row[index];
+                    return acc;
+                }, {}));
+            }
+
+            return data;
+        };
+
+        const normalizeScheduleRecord = (record) => {
+            const maLop = normalizeClassCode(getField(record, [
+                'ma_lop', 'maLop', 'mã_lớp', 'Mã lớp', 'Mã Lớp', 'lop', 'lớp', 'class', 'classCode', 'class_code'
+            ]));
+            const thu = normalizeDay(getField(record, [
+                'thu', 'thứ', 'Thứ', 'THỨ', 'day', 'ngay_trong_tuan', 'ngày_trong_tuần'
+            ]));
+            const thoiGian = String(getField(record, [
+                'thoi_gian', 'thoiGian', 'thời_gian', 'Thời gian', 'THỜI GIAN HỌC', 'time', 'slot'
+            ])).trim();
+            const gioBatDau = String(getField(record, [
+                'gio_bat_dau', 'gioBatDau', 'giờ_bắt_đầu', 'start_time', 'start'
+            ])).trim();
+            const gioKetThuc = String(getField(record, [
+                'gio_ket_thuc', 'gioKetThuc', 'giờ_kết_thúc', 'end_time', 'end'
+            ])).trim();
+
+            const contentRaw = String(getField(record, [
+                'noi_dung', 'nội_dung', 'content', 'lich_hoc', 'lịch_học', 'value', 'cell'
+            ]) || '').trim();
+
+            let monHoc = String(getField(record, [
+                'mon_hoc', 'monHoc', 'môn_học', 'Môn học', 'subject'
+            ]) || '').trim();
+            let giaoVien = String(getField(record, [
+                'giao_vien', 'giaoVien', 'giáo_viên', 'Giáo viên', 'teacher'
+            ]) || '').trim();
+
+            const contentParts = contentRaw
+                .replace(/<br\s*\/?\s*>/gi, '\n')
+                .split(/\r?\n/)
+                .map(part => part.trim())
+                .filter(Boolean);
+
+            if (!monHoc && contentParts[0]) monHoc = contentParts[0];
+            if (!giaoVien && contentParts[1]) giaoVien = contentParts.slice(1).join(' - ');
+
+            if (!maLop || !thu || !thoiGian) return null;
+
+            return { maLop, thu, thoiGian, gioBatDau, gioKetThuc, monHoc, giaoVien };
+        };
+
+        const sortTimeSlots = (a, b) => {
+            const toMinutes = (slot) => {
+                const match = String(slot).match(/(\d{1,2})\s*(?:h|:)\s*(\d{0,2})/i);
+                if (!match) return 9999;
+                return Number(match[1]) * 60 + Number(match[2] || 0);
+            };
+            return toMinutes(a) - toMinutes(b);
+        };
+
+        /** --- LOAD SCHEDULE FROM GOOGLE SHEET DB ---
+         * Dùng JSONP để đọc Apps Script từ website khác domain.
+         * Apps Script cần trả về callback(JSON) khi URL có tham số callback.
+         */
+        const buildUrlWithParam = (url, params = {}) => {
+            const separator = url.includes('?') ? '&' : '?';
+            const query = Object.entries(params)
+                .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+                .join('&');
+            return `${url}${separator}${query}`;
+        };
+
+        const loadScheduleViaJsonp = (url, timeoutMs = 20000) => new Promise((resolve, reject) => {
+            const callbackName = `__scheduleCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+            const script = document.createElement('script');
+            let settled = false;
+
+            const cleanup = () => {
+                if (script.parentNode) script.parentNode.removeChild(script);
+                try { delete window[callbackName]; } catch (error) { window[callbackName] = undefined; }
+                clearTimeout(timer);
+            };
+
+            const timer = setTimeout(() => {
+                if (settled) return;
+                settled = true;
+                cleanup();
+                reject(new Error('Không nhận được phản hồi từ Apps Script. Kiểm tra Web App đã Deploy quyền Anyone và đã dùng đúng code .gs bản JSONP.'));
+            }, timeoutMs);
+
+            window[callbackName] = (payload) => {
+                if (settled) return;
+                settled = true;
+                cleanup();
+                resolve(payload);
+            };
+
+            script.onerror = () => {
+                if (settled) return;
+                settled = true;
+                cleanup();
+                reject(new Error('Không tải được Apps Script. Kiểm tra link /exec, quyền truy cập Anyone và deploy New version.'));
+            };
+
+            script.async = true;
+            script.src = buildUrlWithParam(url, { callback: callbackName, _: Date.now() });
+            document.head.appendChild(script);
+        });
+
+        const loadSchedulePayload = async () => {
+            return await loadScheduleViaJsonp(SCHEDULE_API_URL);
+        };
+
+        const loadScheduleData = async () => {
+            scheduleLoadState = { loading: true, error: '' };
+            try {
+                const payload = await loadSchedulePayload();
+
+                if (payload && payload.ok === false) {
+                    throw new Error(payload.error || 'DB Apps Script trả về lỗi.');
+                }
+
+                const records = extractRawScheduleRows(payload)
+                    .map(normalizeScheduleRecord)
+                    .filter(Boolean);
+
+                schedulesByClass = records.reduce((acc, item) => {
+                    if (!acc[item.maLop]) acc[item.maLop] = [];
+                    acc[item.maLop].push(item);
+                    return acc;
+                }, {});
+
+                scheduleLoadState = { loading: false, error: '' };
+            } catch (error) {
+                console.error('Không tải được lịch học:', error);
+                schedulesByClass = {};
+                scheduleLoadState = {
+                    loading: false,
+                    error: error.message || 'Không tải được lịch học từ Google Sheet.'
+                };
+            }
+        };
+
+        /** --- RENDER FUNCTIONS --- */
         const renderContacts = () => {
             const container = document.getElementById('contact-container');
 
@@ -722,10 +1123,8 @@
 
         window.setContactFilter = (filter, btn) => {
             currentContactFilter = filter;
-            // Update UI buttons
             document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
             btn.classList.add('active');
-            // Re-render
             renderContacts();
         };
 
@@ -738,19 +1137,113 @@
                 </div>
             `).join('');
 
-            if (CLASSES.length > 0) renderClassContent(CLASSES[0].id);
+            if (CLASSES.length > 0) renderClassContent(currentSelectedClassId || CLASSES[0].id);
         };
 
         window.selectClass = (classId) => {
+            currentSelectedClassId = classId;
             document.querySelectorAll('.class-tab').forEach(el => el.classList.remove('active'));
             document.getElementById(`btn-${classId}`).classList.add('active');
             renderClassContent(classId);
+        };
+
+        const renderSchedule = (classData) => {
+            if (scheduleLoadState.loading) {
+                return `
+                    <div class="schedule-section">
+                        <div class="schedule-topline">
+                            <div class="schedule-title"><i class="fa-solid fa-calendar-days"></i> Lịch học theo tuần</div>
+                            <span class="schedule-badge"><i class="fa-solid fa-rotate"></i> Đang tải từ Sheet</span>
+                        </div>
+                        <div class="schedule-state"><i class="fa-solid fa-spinner fa-spin"></i><span>Đang tải lịch học từ Google Sheet...</span></div>
+                    </div>
+                `;
+            }
+
+            if (scheduleLoadState.error) {
+                return `
+                    <div class="schedule-section">
+                        <div class="schedule-topline">
+                            <div class="schedule-title"><i class="fa-solid fa-calendar-days"></i> Lịch học theo tuần</div>
+                        </div>
+                        <div class="schedule-state"><i class="fa-solid fa-triangle-exclamation"></i><span>${escapeHTML(scheduleLoadState.error)}</span></div>
+                    </div>
+                `;
+            }
+
+            const scheduleItems = schedulesByClass[classData.scheduleCode] || [];
+            const today = getTodayDayName();
+
+            if (!scheduleItems.length) {
+                return `
+                    <div class="schedule-section">
+                        <div class="schedule-topline">
+                            <div class="schedule-title"><i class="fa-solid fa-calendar-days"></i> Lịch học theo tuần</div>
+                        </div>
+                        <div class="schedule-state"><i class="fa-solid fa-circle-info"></i><span>Chưa có lịch học cho lớp này trong DB.</span></div>
+                    </div>
+                `;
+            }
+
+            const timeSlots = [...new Set(scheduleItems.map(item => item.thoiGian))].sort(sortTimeSlots);
+            const rowsHtml = timeSlots.map(slot => {
+                const cellsHtml = DAY_ORDER.map(day => {
+                    const entries = scheduleItems.filter(item => item.thu === day && item.thoiGian === slot);
+                    const visibleEntries = entries.filter(item => item.monHoc || item.giaoVien);
+                    const isToday = day === today;
+
+                    if (!visibleEntries.length) {
+                        return `<td class="${isToday ? 'today-cell' : ''}"><div class="schedule-empty-cell">—</div></td>`;
+                    }
+
+                    const lessonsHtml = visibleEntries.map(item => `
+                        <span class="schedule-lesson">
+                            ${item.monHoc ? `<span class="schedule-subject">${escapeHTML(item.monHoc)}</span>` : ''}
+                            ${item.giaoVien ? `<span class="schedule-teacher"><i class="fa-solid fa-user-pen"></i> ${escapeHTML(item.giaoVien)}</span>` : ''}
+                        </span>
+                    `).join('');
+
+                    return `<td class="${isToday ? 'today-cell' : ''}">${lessonsHtml}</td>`;
+                }).join('');
+
+                return `
+                    <tr>
+                        <td class="schedule-time">${escapeHTML(slot)}</td>
+                        ${cellsHtml}
+                    </tr>
+                `;
+            }).join('');
+
+            const headerHtml = DAY_ORDER.map(day => `
+                <th class="${day === today ? 'today-col' : ''}">${day}</th>
+            `).join('');
+
+            return `
+                <div class="schedule-section">
+                    <div class="schedule-topline">
+                        <div class="schedule-title"><i class="fa-solid fa-calendar-days"></i> Lịch học theo tuần</div>
+                    </div>
+                    <div class="schedule-table-wrap">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    ${headerHtml}
+                                </tr>
+                            </thead>
+                            <tbody>${rowsHtml}</tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
         };
 
         const renderClassContent = (classId) => {
             const data = CLASSES.find(c => c.id === classId);
             const panel = document.getElementById('class-detail-panel');
             if (!data) return;
+
+            const scheduleHtml = renderSchedule(data);
 
             const linksHtml = data.info.map(item => `
                 <a href="${item.link}" target="_blank" class="resource-link">
@@ -769,14 +1262,17 @@
                         <i class="fa-solid fa-folder-open class-icon-lg"></i>
                         <span class="class-title-lg">${data.fullTitle}</span>
                     </div>
+                    ${scheduleHtml}
                     <div class="class-resources">${linksHtml}</div>
                 </div>
             `;
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             renderContacts();
             renderClassSystem();
+            await loadScheduleData();
+            renderClassContent(currentSelectedClassId || CLASSES[0].id);
         });
     </script>
 </body>
