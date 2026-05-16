@@ -1174,17 +1174,6 @@
             const scheduleItems = schedulesByClass[classData.scheduleCode] || [];
             const today = getTodayDayName();
 
-            if (!scheduleItems.length) {
-                return `
-                    <div class="schedule-section">
-                        <div class="schedule-topline">
-                            <div class="schedule-title"><i class="fa-solid fa-calendar-days"></i> Lịch học theo tuần</div>
-                        </div>
-                        <div class="schedule-state"><i class="fa-solid fa-circle-info"></i><span>Chưa có lịch học cho lớp này trong DB.</span></div>
-                    </div>
-                `;
-            }
-
             const timeSlots = [...new Set(scheduleItems.map(item => item.thoiGian))].sort(sortTimeSlots);
             const rowsHtml = timeSlots.map(slot => {
                 const cellsHtml = DAY_ORDER.map(day => {
@@ -1218,11 +1207,41 @@
                 <th class="${day === today ? 'today-col' : ''}">${day}</th>
             `).join('');
 
+            const todayItems = scheduleItems
+                .filter(item => item.thu === today && (item.monHoc || item.giaoVien))
+                .sort((a, b) => sortTimeSlots(a.thoiGian, b.thoiGian));
+            
+            let todayScheduleHtml = '';
+            if (todayItems.length > 0) {
+                const itemsHtml = todayItems.map(item => `
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 10px; background: #fffafa; border-left: 3px solid var(--primary-color); border-radius: 4px;">
+                        <span style="font-weight: 800; color: var(--primary-color); min-width: 90px;">${escapeHTML(item.thoiGian)}</span>
+                        <div>
+                            <span style="display: block; font-weight: 700; color: var(--text-heading);">${escapeHTML(item.monHoc)}</span>
+                            ${item.giaoVien ? `<span style="display: block; font-size: 0.85rem; color: #718096;"><i class="fa-solid fa-user-pen"></i> ${escapeHTML(item.giaoVien)}</span>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+                todayScheduleHtml = `
+                    <div style="margin-bottom: 15px; padding: 15px; background: #fff3f3; border-radius: var(--radius-md); border: 1px dashed rgba(168,0,0,0.3);">
+                        <h4 style="color: var(--primary-color); font-size: 0.95rem; margin-bottom: 5px;"><i class="fa-solid fa-bolt"></i> Lịch hôm nay (${today})</h4>
+                        ${itemsHtml}
+                    </div>
+                `;
+            } else {
+                todayScheduleHtml = `
+                    <div style="margin-bottom: 15px; padding: 12px 15px; background: #f8fafc; border-radius: var(--radius-md); border: 1px dashed var(--border-color); color: #718096; font-size: 0.9rem;">
+                        <i class="fa-solid fa-mug-hot" style="margin-right: 5px;"></i> Hôm nay không có lịch học
+                    </div>
+                `;
+            }
+
             return `
                 <div class="schedule-section">
                     <div class="schedule-topline">
                         <div class="schedule-title"><i class="fa-solid fa-calendar-days"></i> Lịch học theo tuần</div>
                     </div>
+                    ${todayScheduleHtml}
                     <div class="schedule-table-wrap">
                         <table class="schedule-table">
                             <thead>
