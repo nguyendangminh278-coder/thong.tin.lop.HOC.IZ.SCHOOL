@@ -844,21 +844,20 @@
 
     <script>
         /** --- DATA SOURCE --- */
-        const SCHEDULE_API_URL = "https://script.google.com/macros/s/AKfycbx-Dp_QVStPJ-zD2Cwd7y0mK26btDAqV4sVn6XUEbLFTR0sbAarrmaYY8oASWUXAzNw/exec";
+
         const DAY_ORDER = ["THỨ 2", "THỨ 3", "THỨ 4", "THỨ 5", "THỨ 6", "THỨ 7", "CHỦ NHẬT"];
 
-        const CONTACTS = [
+        let CONTACTS = [
             { name: "A. Đăng Khoa", role: "Quản lí lớp", desc: "Bảo mẫu lớp", phone: "0949575817", link: "https://zalo.me/0949575817", icon: "fa-user-gear" },
             { name: "A. Trì", role: "Vận chuyển", desc: "Sách & Quà tặng", phone: "0334642345", link: "https://zalo.me/0334642345", icon: "fa-truck-fast" },
-            { name: "Chị Nguyệt", role: "Lead Truyền Thông", desc: "Ebook - Live FB", phone: "0346597853", link: "https://zalo.me/0346597853", icon: "fa-bullhorn" },
             { name: "A. Minh Hiếu", role: "Trợ Giảng Lý", desc: "Lead trợ giảng", phone: "0865457756", link: "https://zalo.me/0865457756", icon: "fa-bolt" },
-            { name: "Trương Mỹ Tâm", role: "Trợ giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0976189413", link: "https://zalo.me/0976189413", icon: "fa-calculator" },
             { name: "Hà Anh Vũ", role: "Trợ giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0388615499", link: "https://zalo.me/0388615499", icon: "fa-calculator" },
             { name: "C. Thanh Ngoan", role: "Trợ Giảng Sinh", desc: "Hỗ trợ môn Sinh", phone: "0352182712", link: "https://zalo.me/0352182712", icon: "fa-dna" },
             { name: "C. Nguyễn Thùy", role: "Trợ Giảng Hóa", desc: "Hỗ trợ môn Hóa", phone: "0942512169", link: "https://zalo.me/0942512169", icon: "fa-flask" },
+            { name: "Fanpage Đánh giá tư duy TSA", role: "Hỗ trợ", desc: "Trang thông tin chính thức", phone: "Inbox", link: "https://www.facebook.com/danhgiatuduybkhntsa", icon: "fa-facebook" }
         ];
 
-        const CLASSES = [
+        let CLASSES = [
             {
                 id: "2k9bk01",
                 scheduleCode: "TSA01",
@@ -867,7 +866,7 @@
                 fullTitle: "Thông tin lớp 2K9.BK01",
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/nydcue584", icon: "fa-comments" },
-                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" },
+                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/bk01tsa-2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" },
                     { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/uhdxou639", icon: "fa-circle-question" }
                 ]
             },
@@ -879,11 +878,29 @@
                 fullTitle: "Lớp 2K9.BK02 TSA 360",
                 info: [
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/yuolvyjafxqj0uherdjs", icon: "fa-comments" },
-                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/2k9xps-2027-lop-xuat-phat-som-tsa360", icon: "fa-laptop-code" },
+                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/bk02tsa2k9xps-2027-lop-xuat-phat-som-tsa360", icon: "fa-laptop-code" },
                     { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/7xm9qzqu23ik89iyz6ku", icon: "fa-circle-question" }
                 ]
             }
         ];
+
+        let SCHEDULES = [
+            { maLop: "TSA01", thu: "THỨ 4", thoiGian: "21h30-23h00", monHoc: "Hình học", giaoVien: "Cô Trang" },
+            { maLop: "TSA01", thu: "THỨ 5", thoiGian: "21h30-23h00", monHoc: "Đại số", giaoVien: "Thầy Thắng" }
+        ];
+
+        // Load overrides from LocalStorage if they exist
+        try {
+            const adminDataStr = localStorage.getItem('IZ_ADMIN_DATA');
+            if (adminDataStr) {
+                const adminData = JSON.parse(adminDataStr);
+                if (adminData.contacts) CONTACTS = adminData.contacts;
+                if (adminData.classes) CLASSES = adminData.classes;
+                if (adminData.schedules) SCHEDULES = adminData.schedules;
+            }
+        } catch (e) {
+            console.error("Lỗi đọc dữ liệu Admin:", e);
+        }
 
         /** --- STATE --- */
         let currentContactFilter = 'all';
@@ -1019,73 +1036,10 @@
             return toMinutes(a) - toMinutes(b);
         };
 
-        /** --- LOAD SCHEDULE FROM GOOGLE SHEET DB ---
-         * Dùng JSONP để đọc Apps Script từ website khác domain.
-         * Apps Script cần trả về callback(JSON) khi URL có tham số callback.
-         */
-        const buildUrlWithParam = (url, params = {}) => {
-            const separator = url.includes('?') ? '&' : '?';
-            const query = Object.entries(params)
-                .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-                .join('&');
-            return `${url}${separator}${query}`;
-        };
-
-        const loadScheduleViaJsonp = (url, timeoutMs = 20000) => new Promise((resolve, reject) => {
-            const callbackName = `__scheduleCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-            const script = document.createElement('script');
-            let settled = false;
-
-            const cleanup = () => {
-                if (script.parentNode) script.parentNode.removeChild(script);
-                try { delete window[callbackName]; } catch (error) { window[callbackName] = undefined; }
-                clearTimeout(timer);
-            };
-
-            const timer = setTimeout(() => {
-                if (settled) return;
-                settled = true;
-                cleanup();
-                reject(new Error('Không nhận được phản hồi từ Apps Script. Kiểm tra Web App đã Deploy quyền Anyone và đã dùng đúng code .gs bản JSONP.'));
-            }, timeoutMs);
-
-            window[callbackName] = (payload) => {
-                if (settled) return;
-                settled = true;
-                cleanup();
-                resolve(payload);
-            };
-
-            script.onerror = () => {
-                if (settled) return;
-                settled = true;
-                cleanup();
-                reject(new Error('Không tải được Apps Script. Kiểm tra link /exec, quyền truy cập Anyone và deploy New version.'));
-            };
-
-            script.async = true;
-            script.src = buildUrlWithParam(url, { callback: callbackName, _: Date.now() });
-            document.head.appendChild(script);
-        });
-
-        const loadSchedulePayload = async () => {
-            return await loadScheduleViaJsonp(SCHEDULE_API_URL);
-        };
-
         const loadScheduleData = async () => {
             scheduleLoadState = { loading: true, error: '' };
             try {
-                const payload = await loadSchedulePayload();
-
-                if (payload && payload.ok === false) {
-                    throw new Error(payload.error || 'DB Apps Script trả về lỗi.');
-                }
-
-                const records = extractRawScheduleRows(payload)
-                    .map(normalizeScheduleRecord)
-                    .filter(Boolean);
-
-                schedulesByClass = records.reduce((acc, item) => {
+                schedulesByClass = (SCHEDULES || []).reduce((acc, item) => {
                     if (!acc[item.maLop]) acc[item.maLop] = [];
                     acc[item.maLop].push(item);
                     return acc;
@@ -1097,7 +1051,7 @@
                 schedulesByClass = {};
                 scheduleLoadState = {
                     loading: false,
-                    error: error.message || 'Không tải được lịch học từ Google Sheet.'
+                    error: 'Không tải được lịch học.'
                 };
             }
         };

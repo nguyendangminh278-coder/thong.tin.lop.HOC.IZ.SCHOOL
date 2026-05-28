@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỌC IZ SCHOOL - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .login-box { max-width: 400px; margin: 100px auto; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .dashboard-container { display: none; margin-top: 30px; margin-bottom: 50px; }
+        .nav-pills .nav-link.active { background-color: #a80000; }
+        .text-primary-custom { color: #a80000; }
+        .btn-primary-custom { background-color: #a80000; color: white; border: none; }
+        .btn-primary-custom:hover { background-color: #8a0000; color: white; }
+        .card-header { background-color: #a80000; color: white; font-weight: bold; }
+        .table-action-btn { cursor: pointer; color: #a80000; margin-right: 10px; }
+        .table-action-btn:hover { color: #8a0000; }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="container" id="login-section">
+    <div class="login-box">
+        <div class="text-center mb-4">
+            <h3 class="text-primary-custom fw-bold">ADMIN PANEL</h3>
+            <p class="text-muted">Đăng nhập để quản trị nội dung</p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tài khoản</label>
+            <input type="text" id="username" class="form-control" placeholder="Nhập tài khoản">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Mật khẩu</label>
+            <input type="password" id="password" class="form-control" placeholder="Nhập mật khẩu">
+        </div>
+        <p id="login-error" class="text-danger small" style="display:none;">Tài khoản hoặc mật khẩu không đúng!</p>
+        <button class="btn btn-primary-custom w-100" onclick="login()">ĐĂNG NHẬP</button>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="container dashboard-container" id="dashboard-section">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary-custom fw-bold"><i class="fa-solid fa-gear"></i> QUẢN TRỊ WEBSITE</h2>
+        <div>
+            <button class="btn btn-success me-2" onclick="saveData()"><i class="fa-solid fa-floppy-disk"></i> Lưu lên Web (Cá nhân)</button>
+            <button class="btn btn-outline-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <i class="fa-solid fa-circle-info"></i> <strong>Lưu ý:</strong> Nút <b>"Lưu lên Web"</b> sẽ lưu thay đổi vào bộ nhớ trình duyệt của máy này. Để cập nhật cho tất cả mọi người, vui lòng sao chép Dữ Liệu ở tab <b>"Hệ Thống"</b> và dán vào file <code>index.html</code>.
+    </div>
+
+    <div class="row">
+        <!-- Sidebar Menu -->
+        <div class="col-md-3 mb-4">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active" id="v-pills-classes-tab" data-bs-toggle="pill" data-bs-target="#v-pills-classes" type="button" role="tab" aria-selected="true"><i class="fa-solid fa-graduation-cap"></i> Quản lý Lớp (2K9)</button>
+                <button class="nav-link" id="v-pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#v-pills-contacts" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-address-book"></i> Quản lý Liên hệ</button>
+                <button class="nav-link" id="v-pills-schedule-tab" data-bs-toggle="pill" data-bs-target="#v-pills-schedule" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-calendar-days"></i> Quản lý Thời khóa biểu</button>
+                <button class="nav-link" id="v-pills-system-tab" data-bs-toggle="pill" data-bs-target="#v-pills-system" type="button" role="tab" aria-selected="false"><i class="fa-solid fa-code"></i> Hệ Thống (Xuất Data)</button>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="col-md-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                
+                <!-- CLASSES TAB -->
+                <div class="tab-pane fade show active" id="v-pills-classes" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Danh sách Lớp Học</span>
+                            <button class="btn btn-sm btn-light" onclick="addClass()"><i class="fa-solid fa-plus"></i> Thêm Lớp</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Mã Lớp (ID)</th>
+                                            <th>Tên Ngắn</th>
+                                            <th>Tiêu đề đầy đủ</th>
+                                            <th>Mã Lịch</th>
+                                            <th style="width: 100px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="classes-tbody">
+                                        <!-- Render JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTACTS TAB -->
+                <div class="tab-pane fade" id="v-pills-contacts" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Thông tin Liên hệ & Trợ giảng</span>
+                            <button class="btn btn-sm btn-light" onclick="addContact()"><i class="fa-solid fa-plus"></i> Thêm Liên Hệ</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Tên</th>
+                                            <th>Vai trò</th>
+                                            <th>SĐT/Mô tả</th>
+                                            <th>Link (Zalo/FB)</th>
+                                            <th style="width: 100px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="contacts-tbody">
+                                        <!-- Render JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCHEDULE TAB -->
+                <div class="tab-pane fade" id="v-pills-schedule" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>Thời khóa biểu theo Lớp</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="small text-muted mb-3">Chọn một lớp để xem và quản lý lịch học từ Thứ 2 đến Chủ Nhật.</p>
+                            
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Chọn Lớp Học:</label>
+                                <select id="schedule-class-select" class="form-select w-auto" style="min-width: 250px;" onchange="renderSchedules()"></select>
+                            </div>
+                            
+                            <div id="schedule-days-container" class="row g-3">
+                                <!-- Render JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SYSTEM TAB -->
+                <div class="tab-pane fade" id="v-pills-system" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">Xuất Dữ Liệu HTML</div>
+                        <div class="card-body">
+                            <p>Để thay đổi vĩnh viễn cho tất cả người dùng, hãy copy đoạn code bên dưới và dán đè thay thế phần <code>const CONTACTS = [...]</code> và <code>const CLASSES = [...]</code> trong file <b>index.html</b>.</p>
+                            <textarea id="export-code" class="form-control font-monospace" rows="15" readonly></textarea>
+                            <button class="btn btn-primary-custom mt-3" onclick="copyCode()"><i class="fa-solid fa-copy"></i> Copy Code</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Class -->
+<div class="modal fade" id="classModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="classModalLabel">Thông Tin Lớp Học</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-class-index">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">ID Lớp (vd: 2k9bk01)</label>
+                        <input type="text" class="form-control" id="c-id">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Mã Lịch (vd: TSA01)</label>
+                        <input type="text" class="form-control" id="c-schedule">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Tên Ngắn (Tab)</label>
+                        <input type="text" class="form-control" id="c-short">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Sub Text (Tab)</label>
+                        <input type="text" class="form-control" id="c-sub">
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Tiêu đề đầy đủ</label>
+                        <input type="text" class="form-control" id="c-full">
+                    </div>
+                </div>
+                <hr>
+                <h6>Danh sách Nút Liên Kết (Tối đa 3-4 nút)</h6>
+                <div id="c-info-list"></div>
+                <button class="btn btn-sm btn-outline-danger mt-2" onclick="addClassInfoBtn()">+ Thêm Nút Link</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary-custom" onclick="saveClassModal()">Lưu Lớp</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Contact -->
+<div class="modal fade" id="contactModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Thông Tin Liên Hệ</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-contact-index">
+                <div class="mb-2">
+                    <label class="form-label">Tên (vd: C. Nguyễn Thùy, Fanpage...)</label>
+                    <input type="text" class="form-control" id="ct-name">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Vai trò (vd: Trợ Giảng, Hỗ trợ)</label>
+                    <input type="text" class="form-control" id="ct-role">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Mô tả ngắn</label>
+                    <input type="text" class="form-control" id="ct-desc">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Số điện thoại / Chữ (hiển thị button)</label>
+                    <input type="text" class="form-control" id="ct-phone">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Link Zalo / Facebook</label>
+                    <input type="text" class="form-control" id="ct-link">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Icon (FontAwesome, vd: fa-facebook, fa-flask)</label>
+                    <input type="text" class="form-control" id="ct-icon" value="fa-user">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary-custom" onclick="saveContactModal()">Lưu Liên Hệ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Schedule -->
+<div class="modal fade" id="scheduleModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Lịch Học Thủ Công</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-sch-index">
+                <div class="mb-2">
+                    <label class="form-label">Mã Lịch (vd: TSA01, TSA02)</label>
+                    <input type="text" class="form-control" id="sch-maLop">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Thứ (vd: THỨ 2, CHỦ NHẬT)</label>
+                    <input type="text" class="form-control" id="sch-thu">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Thời gian (vd: 20h00, 21h30)</label>
+                    <input type="text" class="form-control" id="sch-thoiGian">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Môn Học (vd: Toán Đại, Thi Thử)</label>
+                    <input type="text" class="form-control" id="sch-monHoc">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Giáo viên / Ghi chú</label>
+                    <input type="text" class="form-control" id="sch-giaoVien">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary-custom" onclick="saveScheduleModal()">Lưu Lịch</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // DEFAULT DATA (if localstorage empty)
+    let appData = {
+        contacts: [
+            { name: "A. Đăng Khoa", role: "Quản lí lớp", desc: "Bảo mẫu lớp", phone: "0949575817", link: "https://zalo.me/0949575817", icon: "fa-user-gear" },
+            { name: "A. Trì", role: "Vận chuyển", desc: "Sách & Quà tặng", phone: "0334642345", link: "https://zalo.me/0334642345", icon: "fa-truck-fast" },
+            { name: "A. Minh Hiếu", role: "Trợ Giảng Lý", desc: "Lead trợ giảng", phone: "0865457756", link: "https://zalo.me/0865457756", icon: "fa-bolt" },
+            { name: "Hà Anh Vũ", role: "Trợ giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0388615499", link: "https://zalo.me/0388615499", icon: "fa-calculator" },
+            { name: "C. Thanh Ngoan", role: "Trợ Giảng Sinh", desc: "Hỗ trợ môn Sinh", phone: "0352182712", link: "https://zalo.me/0352182712", icon: "fa-dna" },
+            { name: "C. Nguyễn Thùy", role: "Trợ Giảng Hóa", desc: "Hỗ trợ môn Hóa", phone: "0942512169", link: "https://zalo.me/0942512169", icon: "fa-flask" },
+            { name: "Fanpage Đánh giá tư duy TSA", role: "Hỗ trợ", desc: "Trang thông tin chính thức", phone: "Inbox", link: "https://www.facebook.com/danhgiatuduybkhntsa", icon: "fa-facebook" }
+        ],
+        classes: [
+            {
+                id: "2k9bk01",
+                scheduleCode: "TSA01",
+                shortName: "Lớp 2K9.BK01",
+                subText: "Lớp đầu tiên",
+                fullTitle: "Thông tin lớp 2K9.BK01",
+                info: [
+                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/nydcue584", icon: "fa-comments" },
+                    { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/bk01tsa-2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" },
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/uhdxou639", icon: "fa-circle-question" }
+                ]
+            },
+            {
+                id: "2k9bk02",
+                scheduleCode: "TSA02",
+                shortName: "Lớp 2K9.BK02",
+                subText: "TSA 360",
+                fullTitle: "Lớp 2K9.BK02 TSA 360",
+                info: [
+                    { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/yuolvyjafxqj0uherdjs", icon: "fa-comments" },
+                    { title: "Link Kích Hoạt", desc: "Bài giảng, Tài liệu & Đề thi", link: "https://hociz.vn/khoa-hoc/bk02tsa2k9xps-2027-lop-xuat-phat-som-tsa360", icon: "fa-laptop-code" },
+                    { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/7xm9qzqu23ik89iyz6ku", icon: "fa-circle-question" }
+                ]
+            }
+        ],
+        schedules: [
+            { maLop: "TSA01", thu: "THỨ 4", thoiGian: "21h30-23h00", monHoc: "Hình học", giaoVien: "Cô Trang" },
+            { maLop: "TSA01", thu: "THỨ 5", thoiGian: "21h30-23h00", monHoc: "Đại số", giaoVien: "Thầy Thắng" }
+        ]
+    };
+
+    // INIT
+    window.onload = () => {
+        const stored = localStorage.getItem('IZ_ADMIN_DATA');
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                if(parsed.contacts) appData = parsed;
+            } catch(e){}
+        }
+        
+        // Check Login state
+        if(sessionStorage.getItem('IZ_ADMIN_LOGGED') === 'true') {
+            showDashboard();
+        }
+    };
+
+    // LOGIN
+    function login() {
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+        if (u === 'Admin' && p === '123456') {
+            sessionStorage.setItem('IZ_ADMIN_LOGGED', 'true');
+            showDashboard();
+        } else {
+            document.getElementById('login-error').style.display = 'block';
+        }
+    }
+    function logout() {
+        sessionStorage.removeItem('IZ_ADMIN_LOGGED');
+        document.getElementById('login-section').style.display = 'block';
+        document.getElementById('dashboard-section').style.display = 'none';
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('login-error').style.display = 'none';
+    }
+    function showDashboard() {
+        document.getElementById('login-section').style.display = 'none';
+        document.getElementById('dashboard-section').style.display = 'block';
+        renderClasses();
+        renderContacts();
+        renderSchedules();
+        updateExportCode();
+    }
+
+    // SAVE & EXPORT
+    function saveData() {
+        localStorage.setItem('IZ_ADMIN_DATA', JSON.stringify(appData));
+        alert("Đã lưu dữ liệu vào trình duyệt thành công!\nMở lại trang index.html trên máy này để xem kết quả.");
+        updateExportCode();
+    }
+    function updateExportCode() {
+        const code = `
+// ==========================================
+// ĐOẠN MÃ XUẤT TỪ TRANG ADMIN
+// Hãy copy và dán đoạn này đè lên phần khai báo CONTACTS và CLASSES trong file index.html
+// ==========================================
+
+let CONTACTS = ${JSON.stringify(appData.contacts, null, 4)};
+
+let CLASSES = ${JSON.stringify(appData.classes, null, 4)};
+
+let SCHEDULES = ${JSON.stringify(appData.schedules, null, 4)};
+        `;
+        document.getElementById('export-code').value = code.trim();
+    }
+    function copyCode() {
+        const txt = document.getElementById('export-code');
+        txt.select();
+        document.execCommand('copy');
+        alert("Đã copy đoạn mã vào Clipboard!");
+    }
+
+    // ================= CLASSES =================
+    let classModalObj = null;
+    function renderClasses() {
+        const tbody = document.getElementById('classes-tbody');
+        tbody.innerHTML = appData.classes.map((c, idx) => `
+            <tr>
+                <td><strong>${c.id}</strong></td>
+                <td>${c.shortName}</td>
+                <td>${c.fullTitle}</td>
+                <td><span class="badge bg-secondary">${c.scheduleCode}</span></td>
+                <td>
+                    <i class="fa-solid fa-pen-to-square table-action-btn" onclick="editClass(${idx})"></i>
+                    <i class="fa-solid fa-trash table-action-btn text-danger" onclick="deleteClass(${idx})"></i>
+                </td>
+            </tr>
+        `).join('');
+    }
+    function deleteClass(idx) {
+        if(confirm('Bạn có chắc chắn muốn xóa lớp này?')) {
+            appData.classes.splice(idx, 1);
+            document.getElementById('schedule-class-select').dataset.loaded = 'false';
+            renderClasses();
+            renderSchedules();
+            updateExportCode();
+        }
+    }
+    function getModal(id) {
+        let m = bootstrap.Modal.getInstance(document.getElementById(id));
+        if(!m) m = new bootstrap.Modal(document.getElementById(id));
+        return m;
+    }
+    function addClass() {
+        document.getElementById('edit-class-index').value = '-1';
+        document.getElementById('c-id').value = '';
+        document.getElementById('c-schedule').value = '';
+        document.getElementById('c-short').value = '';
+        document.getElementById('c-sub').value = '';
+        document.getElementById('c-full').value = '';
+        document.getElementById('c-info-list').innerHTML = '';
+        addClassInfoBtn(); 
+        getModal('classModal').show();
+    }
+    function editClass(idx) {
+        const c = appData.classes[idx];
+        document.getElementById('edit-class-index').value = idx;
+        document.getElementById('c-id').value = c.id;
+        document.getElementById('c-schedule').value = c.scheduleCode;
+        document.getElementById('c-short').value = c.shortName;
+        document.getElementById('c-sub').value = c.subText;
+        document.getElementById('c-full').value = c.fullTitle;
+        
+        const container = document.getElementById('c-info-list');
+        container.innerHTML = '';
+        c.info.forEach(inf => addClassInfoBtn(inf));
+        
+        getModal('classModal').show();
+    }
+    function addClassInfoBtn(data = {title:'', desc:'', link:'', icon:'fa-link'}) {
+        const container = document.getElementById('c-info-list');
+        const div = document.createElement('div');
+        div.className = 'border p-2 mb-2 bg-light position-relative info-btn-item';
+        div.innerHTML = `
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" onclick="this.parentElement.remove()"></button>
+            <div class="row g-2">
+                <div class="col-md-3"><input type="text" class="form-control form-control-sm i-title" placeholder="Tiêu đề" value="${data.title}"></div>
+                <div class="col-md-4"><input type="text" class="form-control form-control-sm i-desc" placeholder="Mô tả" value="${data.desc}"></div>
+                <div class="col-md-3"><input type="text" class="form-control form-control-sm i-link" placeholder="Link (URL)" value="${data.link}"></div>
+                <div class="col-md-2"><input type="text" class="form-control form-control-sm i-icon" placeholder="Icon" value="${data.icon}"></div>
+            </div>
+        `;
+        container.appendChild(div);
+    }
+    function saveClassModal() {
+        const idx = parseInt(document.getElementById('edit-class-index').value);
+        const newClass = {
+            id: document.getElementById('c-id').value,
+            scheduleCode: document.getElementById('c-schedule').value,
+            shortName: document.getElementById('c-short').value,
+            subText: document.getElementById('c-sub').value,
+            fullTitle: document.getElementById('c-full').value,
+            info: []
+        };
+        
+        document.querySelectorAll('.info-btn-item').forEach(el => {
+            newClass.info.push({
+                title: el.querySelector('.i-title').value,
+                desc: el.querySelector('.i-desc').value,
+                link: el.querySelector('.i-link').value,
+                icon: el.querySelector('.i-icon').value
+            });
+        });
+
+        if(idx === -1) appData.classes.push(newClass);
+        else appData.classes[idx] = newClass;
+        
+        document.getElementById('schedule-class-select').dataset.loaded = 'false';
+        getModal('classModal').hide();
+        renderClasses();
+        renderSchedules();
+        updateExportCode();
+    }
+
+    // ================= CONTACTS =================
+    function renderContacts() {
+        const tbody = document.getElementById('contacts-tbody');
+        tbody.innerHTML = appData.contacts.map((c, idx) => `
+            <tr>
+                <td><strong>${c.name}</strong></td>
+                <td><span class="badge bg-danger">${c.role}</span></td>
+                <td>${c.phone} <br><small class="text-muted">${c.desc}</small></td>
+                <td><a href="${c.link}" target="_blank">Link</a> <i class="fa-solid ${c.icon}"></i></td>
+                <td>
+                    <i class="fa-solid fa-pen-to-square table-action-btn" onclick="editContact(${idx})"></i>
+                    <i class="fa-solid fa-trash table-action-btn text-danger" onclick="deleteContact(${idx})"></i>
+                </td>
+            </tr>
+        `).join('');
+    }
+    function deleteContact(idx) {
+        if(confirm('Xóa liên hệ này?')) {
+            appData.contacts.splice(idx, 1);
+            renderContacts();
+            updateExportCode();
+        }
+    }
+    function addContact() {
+        document.getElementById('edit-contact-index').value = '-1';
+        document.getElementById('ct-name').value = '';
+        document.getElementById('ct-role').value = '';
+        document.getElementById('ct-desc').value = '';
+        document.getElementById('ct-phone').value = '';
+        document.getElementById('ct-link').value = '';
+        document.getElementById('ct-icon').value = 'fa-user';
+        getModal('contactModal').show();
+    }
+    function editContact(idx) {
+        const c = appData.contacts[idx];
+        document.getElementById('edit-contact-index').value = idx;
+        document.getElementById('ct-name').value = c.name;
+        document.getElementById('ct-role').value = c.role;
+        document.getElementById('ct-desc').value = c.desc;
+        document.getElementById('ct-phone').value = c.phone;
+        document.getElementById('ct-link').value = c.link;
+        document.getElementById('ct-icon').value = c.icon;
+        getModal('contactModal').show();
+    }
+    function saveContactModal() {
+        const idx = parseInt(document.getElementById('edit-contact-index').value);
+        const obj = {
+            name: document.getElementById('ct-name').value,
+            role: document.getElementById('ct-role').value,
+            desc: document.getElementById('ct-desc').value,
+            phone: document.getElementById('ct-phone').value,
+            link: document.getElementById('ct-link').value,
+            icon: document.getElementById('ct-icon').value
+        };
+        if(idx === -1) appData.contacts.push(obj);
+        else appData.contacts[idx] = obj;
+        
+        getModal('contactModal').hide();
+        renderContacts();
+        updateExportCode();
+    }
+
+    // ================= SCHEDULES =================
+    const DAYS = ["THỨ 2", "THỨ 3", "THỨ 4", "THỨ 5", "THỨ 6", "THỨ 7", "CHỦ NHẬT"];
+
+    function renderSchedules() {
+        const select = document.getElementById('schedule-class-select');
+        if (select.options.length === 0 || select.dataset.loaded !== 'true') {
+            select.innerHTML = appData.classes.map(c => `<option value="${c.scheduleCode}">${c.shortName} (${c.scheduleCode})</option>`).join('');
+            select.dataset.loaded = 'true';
+        }
+        
+        const currentClassCode = select.value;
+        const container = document.getElementById('schedule-days-container');
+
+        if (!currentClassCode) {
+            container.innerHTML = '<div class="col-12"><div class="alert alert-warning">Chưa có lớp nào. Vui lòng tạo lớp ở tab "Quản lý Lớp" trước.</div></div>';
+            return;
+        }
+
+        let html = '';
+        DAYS.forEach(day => {
+            const items = (appData.schedules || []).map((s, idx) => ({...s, _index: idx}))
+                                                   .filter(s => s.maLop === currentClassCode && s.thu === day);
+            
+            let itemsHtml = items.map(s => `
+                <div class="border rounded p-2 mb-2 bg-white shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <span class="badge bg-danger mb-1">${s.thoiGian}</span><br>
+                            <strong class="text-dark">${s.monHoc}</strong><br>
+                            <small class="text-muted"><i class="fa-solid fa-user-pen"></i> ${s.giaoVien}</small>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-pen-to-square table-action-btn" onclick="editSchedule(${s._index})"></i>
+                            <i class="fa-solid fa-trash table-action-btn text-danger m-0" onclick="deleteSchedule(${s._index})"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (items.length === 0) {
+                itemsHtml = `<p class="text-muted small fst-italic text-center mt-2">Trống</p>`;
+            }
+
+            html += `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100" style="background-color: #f8f9fa;">
+                        <div class="card-header py-2 d-flex justify-content-between align-items-center bg-secondary text-white">
+                            <strong>${day}</strong>
+                            <button class="btn btn-sm btn-light py-0 px-2" onclick="addSchedule('${day}')" title="Thêm lịch"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <div class="card-body p-2">
+                            ${itemsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+
+    function deleteSchedule(idx) {
+        if(confirm('Xóa lịch học này?')) {
+            appData.schedules.splice(idx, 1);
+            renderSchedules();
+            updateExportCode();
+        }
+    }
+    
+    function addSchedule(day) {
+        const classCode = document.getElementById('schedule-class-select').value;
+        if(!classCode) return alert("Vui lòng chọn lớp trước!");
+
+        document.getElementById('edit-sch-index').value = '-1';
+        document.getElementById('sch-maLop').value = classCode;
+        document.getElementById('sch-thu').value = day;
+        document.getElementById('sch-thoiGian').value = '';
+        document.getElementById('sch-monHoc').value = '';
+        document.getElementById('sch-giaoVien').value = '';
+        getModal('scheduleModal').show();
+    }
+    function editSchedule(idx) {
+        const s = appData.schedules[idx];
+        document.getElementById('edit-sch-index').value = idx;
+        document.getElementById('sch-maLop').value = s.maLop;
+        document.getElementById('sch-thu').value = s.thu;
+        document.getElementById('sch-thoiGian').value = s.thoiGian;
+        document.getElementById('sch-monHoc').value = s.monHoc;
+        document.getElementById('sch-giaoVien').value = s.giaoVien;
+        getModal('scheduleModal').show();
+    }
+    function saveScheduleModal() {
+        const idx = parseInt(document.getElementById('edit-sch-index').value);
+        if(!appData.schedules) appData.schedules = [];
+        const obj = {
+            maLop: document.getElementById('sch-maLop').value.trim().toUpperCase(),
+            thu: document.getElementById('sch-thu').value.trim().toUpperCase(),
+            thoiGian: document.getElementById('sch-thoiGian').value.trim(),
+            monHoc: document.getElementById('sch-monHoc').value.trim(),
+            giaoVien: document.getElementById('sch-giaoVien').value.trim()
+        };
+        if(idx === -1) appData.schedules.push(obj);
+        else appData.schedules[idx] = obj;
+        
+        getModal('scheduleModal').hide();
+        renderSchedules();
+        updateExportCode();
+    }
+</script>
+</body>
+</html>
