@@ -981,6 +981,39 @@
             return value;
         };
 
+        // Xóa toàn bộ lịch Thứ 2 của lớp TSA02, kể cả dữ liệu đã từng lưu từ trang Admin trong localStorage.
+        const isTsa02MondaySchedule = (item) => {
+            const classCode = normalizeClassCode(getField(item, [
+                'ma_lop', 'maLop', 'mã_lớp', 'Mã lớp', 'Mã Lớp', 'lop', 'lớp', 'class', 'classCode', 'class_code'
+            ]));
+            const day = normalizeDay(getField(item, [
+                'thu', 'thứ', 'Thứ', 'THỨ', 'day', 'ngay_trong_tuan', 'ngày_trong_tuần'
+            ]));
+            return classCode === 'TSA02' && day === 'THỨ 2';
+        };
+
+        const removeTsa02MondaySchedule = () => {
+            SCHEDULES = (SCHEDULES || []).filter(item => !isTsa02MondaySchedule(item));
+
+            try {
+                const adminDataStr = localStorage.getItem('IZ_ADMIN_DATA');
+                if (!adminDataStr) return;
+
+                const adminData = JSON.parse(adminDataStr);
+                if (!Array.isArray(adminData?.schedules)) return;
+
+                const cleanedSchedules = adminData.schedules.filter(item => !isTsa02MondaySchedule(item));
+                if (cleanedSchedules.length !== adminData.schedules.length) {
+                    adminData.schedules = cleanedSchedules;
+                    localStorage.setItem('IZ_ADMIN_DATA', JSON.stringify(adminData));
+                }
+            } catch (error) {
+                console.error('Không thể xóa lịch Thứ 2 của TSA02 trong Admin data:', error);
+            }
+        };
+
+        removeTsa02MondaySchedule();
+
         const getTodayDayName = () => {
             const today = new Date().getDay();
             return today === 0 ? 'CHỦ NHẬT' : `THỨ ${today + 1}`;
