@@ -899,14 +899,21 @@
             }
         ];
 
+        // Thời khóa biểu TSA02 mới nhất theo ảnh lịch lớp TSA BK02 360.
+        const TSA02_LATEST_SCHEDULE = [
+            { maLop: "TSA02", thu: "THỨ 2", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
+            { maLop: "TSA02", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" },
+            { maLop: "TSA02", thu: "THỨ 5", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" },
+            { maLop: "TSA02", thu: "THỨ 6", thoiGian: "20h00 - 21h30", monHoc: "Đọc hiểu", giaoVien: "Thầy Nghĩa" },
+            { maLop: "TSA02", thu: "THỨ 7", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
+            { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "15h00 - 16h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
+            { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" }
+        ];
+
         let SCHEDULES = [
             { maLop: "TSA01", thu: "THỨ 4", thoiGian: "21h30-23h00", monHoc: "Hình học", giaoVien: "Cô Trang" },
             { maLop: "TSA01", thu: "THỨ 5", thoiGian: "21h30-23h00", monHoc: "Đại số", giaoVien: "Thầy Thắng" },
-            { maLop: "TSA02", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" },
-            { maLop: "TSA02", thu: "THỨ 5", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" },
-            { maLop: "TSA02", thu: "THỨ 7", thoiGian: "15h00", monHoc: "Đọc Hiểu", giaoVien: "Thầy Nghĩa" },
-            { maLop: "TSA02", thu: "THỨ 7", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
-            { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "21h30 - 23h00", monHoc: "Hình học", giaoVien: "Cô Trang" }
+            ...TSA02_LATEST_SCHEDULE
         ];
 
         // Load overrides from LocalStorage if they exist
@@ -981,38 +988,50 @@
             return value;
         };
 
-        // Xóa toàn bộ lịch Thứ 2 của lớp TSA02, kể cả dữ liệu đã từng lưu từ trang Admin trong localStorage.
-        const isTsa02MondaySchedule = (item) => {
+        const isTsa02Schedule = (item) => {
             const classCode = normalizeClassCode(getField(item, [
                 'ma_lop', 'maLop', 'mã_lớp', 'Mã lớp', 'Mã Lớp', 'lop', 'lớp', 'class', 'classCode', 'class_code'
             ]));
-            const day = normalizeDay(getField(item, [
-                'thu', 'thứ', 'Thứ', 'THỨ', 'day', 'ngay_trong_tuan', 'ngày_trong_tuần'
-            ]));
-            return classCode === 'TSA02' && day === 'THỨ 2';
+            return classCode === 'TSA02';
         };
 
-        const removeTsa02MondaySchedule = () => {
-            SCHEDULES = (SCHEDULES || []).filter(item => !isTsa02MondaySchedule(item));
+        // Cập nhật một lần dữ liệu TSA02 cũ trong localStorage, tránh lịch cũ ghi đè lịch mới.
+        const TSA02_SCHEDULE_VERSION = 'TSA02_2607_V1';
+        const applyLatestTsa02Schedule = () => {
+            const versionKey = 'IZ_TSA02_SCHEDULE_VERSION';
 
             try {
+                if (localStorage.getItem(versionKey) === TSA02_SCHEDULE_VERSION) return;
+
+                SCHEDULES = [
+                    ...(SCHEDULES || []).filter(item => !isTsa02Schedule(item)),
+                    ...TSA02_LATEST_SCHEDULE.map(item => ({ ...item }))
+                ];
+
                 const adminDataStr = localStorage.getItem('IZ_ADMIN_DATA');
-                if (!adminDataStr) return;
-
-                const adminData = JSON.parse(adminDataStr);
-                if (!Array.isArray(adminData?.schedules)) return;
-
-                const cleanedSchedules = adminData.schedules.filter(item => !isTsa02MondaySchedule(item));
-                if (cleanedSchedules.length !== adminData.schedules.length) {
-                    adminData.schedules = cleanedSchedules;
-                    localStorage.setItem('IZ_ADMIN_DATA', JSON.stringify(adminData));
+                if (adminDataStr) {
+                    const adminData = JSON.parse(adminDataStr);
+                    if (Array.isArray(adminData?.schedules)) {
+                        adminData.schedules = [
+                            ...adminData.schedules.filter(item => !isTsa02Schedule(item)),
+                            ...TSA02_LATEST_SCHEDULE.map(item => ({ ...item }))
+                        ];
+                        localStorage.setItem('IZ_ADMIN_DATA', JSON.stringify(adminData));
+                    }
                 }
+
+                localStorage.setItem(versionKey, TSA02_SCHEDULE_VERSION);
             } catch (error) {
-                console.error('Không thể xóa lịch Thứ 2 của TSA02 trong Admin data:', error);
+                // Nếu localStorage bị chặn, vẫn dùng lịch mới trong phiên hiện tại.
+                SCHEDULES = [
+                    ...(SCHEDULES || []).filter(item => !isTsa02Schedule(item)),
+                    ...TSA02_LATEST_SCHEDULE.map(item => ({ ...item }))
+                ];
+                console.error('Không thể đồng bộ lịch TSA02 vào localStorage:', error);
             }
         };
 
-        removeTsa02MondaySchedule();
+        applyLatestTsa02Schedule();
 
         const getTodayDayName = () => {
             const today = new Date().getDay();
