@@ -777,16 +777,20 @@
                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                 </iframe>
             </div>
-            
+
             <div class="guides-container">
-                <h4 style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text-heading); margin-bottom: 12px;"><i class="fa-solid fa-book-open" style="color: var(--primary-color);"></i> Tài liệu hướng dẫn:</h4>
+                <h4
+                    style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text-heading); margin-bottom: 12px;">
+                    <i class="fa-solid fa-book-open" style="color: var(--primary-color);"></i> Tài liệu hướng dẫn:</h4>
                 <a href="huong-dan-classin.html" class="resource-link" style="margin-bottom: 0;">
-                    <div class="res-icon" style="background: var(--primary-bg-subtle); color: var(--primary-color);"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <div class="res-icon" style="background: var(--primary-bg-subtle); color: var(--primary-color);"><i
+                            class="fa-solid fa-chalkboard-user"></i></div>
                     <div class="res-info">
                         <span class="res-title">Hướng Dẫn Tải & Sử Dụng ClassIn</span>
                         <span class="res-desc">Cách cài đặt, đăng ký và tham gia lớp học với giáo viên</span>
                     </div>
-                    <div style="align-self: center; color: var(--primary-color);"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div style="align-self: center; color: var(--primary-color);"><i
+                            class="fa-solid fa-arrow-right"></i></div>
                 </a>
             </div>
         </section>
@@ -860,9 +864,9 @@
         const DAY_ORDER = ["THỨ 2", "THỨ 3", "THỨ 4", "THỨ 5", "THỨ 6", "THỨ 7", "CHỦ NHẬT"];
 
         let CONTACTS = [
+            { name: "A. Trần Hoàng", role: "Hỗ trợ tài khoản", desc: "Mở khóa & Vận chuyển", phone: "0366182306", link: "https://zalo.me/0366182306", icon: "fa-unlock-keyhole" },
             { name: "A. Xuân Hiếu", role: "Bài Giảng - Tài Liệu - Bài Thi", desc: "Lead trợ giảng", phone: "0865457756", link: "https://zalo.me/0865457756", icon: "fa-book" },
             { name: "A. Xuân Hiếu", role: "Website", desc: "Lead trợ giảng", phone: "0865457756", link: "https://zalo.me/0865457756", icon: "fa-globe" },
-            { name: "A. Đăng Khoa", role: "Quản lí lớp", desc: "Bảo mẫu lớp", phone: "0949575817", link: "https://zalo.me/0949575817", icon: "fa-user-gear" },
             { name: "A. Trì", role: "Vận chuyển", desc: "Sách & Quà tặng", phone: "0334642345", link: "https://zalo.me/0334642345", icon: "fa-truck-fast" },
             { name: "A. Xuân Hiếu", role: "Trợ Giảng Lý", desc: "Lead trợ giảng", phone: "0865457756", link: "https://zalo.me/0865457756", icon: "fa-bolt" },
             { name: "Hà Anh Vũ", role: "Trợ giảng Toán", desc: "Hỗ trợ môn Toán", phone: "0388615499", link: "https://zalo.me/0388615499", icon: "fa-calculator" },
@@ -880,6 +884,7 @@
                 subText: "Lớp đầu tiên",
                 fullTitle: "Thông tin lớp 2K9.BK01",
                 info: [
+                    { title: "Quản lí lớp A. Đăng Khoa", desc: "Bảo mẫu lớp (0949575817)", link: "https://zalo.me/0949575817", icon: "fa-user-gear" },
                     { title: "Nhóm Zalo Chính", desc: "Nhận lịch học, link Zoom", link: "https://zalo.me/g/nydcue584", icon: "fa-comments" },
                     { title: "Kích Hoạt Khóa Học", desc: "Xem lại bài giảng, tài liệu", link: "https://hociz.vn/khoa-hoc/bk01tsa-2k9xps-2027-lop-xuat-phat-som-tinh-hoa-tsa", icon: "fa-laptop-code" },
                     { title: "Hỏi Đáp Trợ Giảng", desc: "Trao đổi bài vở với trợ giảng", link: "https://zalo.me/g/uhdxou639", icon: "fa-circle-question" }
@@ -902,15 +907,16 @@
         // Thời khóa biểu TSA02 mới nhất theo ảnh lịch lớp TSA BK02 360.
         const TSA02_LATEST_SCHEDULE = [
             { maLop: "TSA02", thu: "THỨ 2", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
-            { maLop: "TSA02", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" },
-            { maLop: "TSA02", thu: "THỨ 5", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" },
-            { maLop: "TSA02", thu: "THỨ 6", thoiGian: "20h00 - 21h30", monHoc: "Đọc hiểu", giaoVien: "Thầy Nghĩa" },
+            { maLop: "TSA02", thu: "THỨ 2", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "cô TRang" },
+            { maLop: "TSA02", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Tăng cường", giaoVien: "thầy Cô vấn" },
+            { maLop: "TSA02", thu: "THỨ 5", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "cô TRang" },
             { maLop: "TSA02", thu: "THỨ 7", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
             { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "15h00 - 16h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
-            { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "Cô Trang" }
+            { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "cô TRang" }
         ];
 
         let SCHEDULES = [
+            { maLop: "TSA01", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Tăng cường", giaoVien: "thầy Cô vấn" },
             { maLop: "TSA01", thu: "THỨ 4", thoiGian: "21h30-23h00", monHoc: "Hình học", giaoVien: "Cô Trang" },
             { maLop: "TSA01", thu: "THỨ 5", thoiGian: "21h30-23h00", monHoc: "Đại số", giaoVien: "Thầy Thắng" },
             ...TSA02_LATEST_SCHEDULE
@@ -996,7 +1002,7 @@
         };
 
         // Cập nhật một lần dữ liệu TSA02 cũ trong localStorage, tránh lịch cũ ghi đè lịch mới.
-        const TSA02_SCHEDULE_VERSION = 'TSA02_2607_V1';
+        const TSA02_SCHEDULE_VERSION = 'TSA02_2607_V2';
         const applyLatestTsa02Schedule = () => {
             const versionKey = 'IZ_TSA02_SCHEDULE_VERSION';
 
@@ -1236,7 +1242,7 @@
             const todayItems = scheduleItems
                 .filter(item => item.thu === today && (item.monHoc || item.giaoVien))
                 .sort((a, b) => sortTimeSlots(a.thoiGian, b.thoiGian));
-            
+
             let todayScheduleHtml = '';
             if (todayItems.length > 0) {
                 const itemsHtml = todayItems.map(item => `
