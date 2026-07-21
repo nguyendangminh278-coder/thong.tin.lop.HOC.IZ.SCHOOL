@@ -908,7 +908,7 @@
         const TSA02_LATEST_SCHEDULE = [
             { maLop: "TSA02", thu: "THỨ 2", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
             { maLop: "TSA02", thu: "THỨ 2", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "cô TRang" },
-            { maLop: "TSA02", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Tăng cường", giaoVien: "thầy Cô vấn" },
+            { maLop: "TSA02", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Tăng cường", giaoVien: "Giáo viên cố vấn" },
             { maLop: "TSA02", thu: "THỨ 5", thoiGian: "21h30 - 23h00", monHoc: "Toán Hình", giaoVien: "cô TRang" },
             { maLop: "TSA02", thu: "THỨ 7", thoiGian: "20h00 - 21h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
             { maLop: "TSA02", thu: "CHỦ NHẬT", thoiGian: "15h00 - 16h30", monHoc: "Toán Đại", giaoVien: "Thầy Thắng" },
@@ -916,9 +916,9 @@
         ];
 
         let SCHEDULES = [
-            { maLop: "TSA01", thu: "THỨ 3", thoiGian: "20h00 - 21h30", monHoc: "Tăng cường", giaoVien: "thầy Cô vấn" },
-            { maLop: "TSA01", thu: "THỨ 4", thoiGian: "21h30 - 23h00", monHoc: "Hình học", giaoVien: "Cô Trang" },
-            { maLop: "TSA01", thu: "THỨ 5", thoiGian: "21h30 - 23h00", monHoc: "Đại số", giaoVien: "Thầy Thắng" },
+            { maLop: "TSA01", thu: "THỨ 3", thoiGian: "21h30 - 23h00", monHoc: "Tăng cường", giaoVien: "Giáo viên cố vấn" },
+            { maLop: "TSA01", thu: "THỨ 4", thoiGian: "21h30-23h00", monHoc: "Hình học", giaoVien: "Cô Trang" },
+            { maLop: "TSA01", thu: "THỨ 5", thoiGian: "21h30-23h00", monHoc: "Đại số", giaoVien: "Thầy Thắng" },
             ...TSA02_LATEST_SCHEDULE
         ];
 
@@ -1002,7 +1002,7 @@
         };
 
         // Cập nhật một lần dữ liệu TSA02 cũ trong localStorage, tránh lịch cũ ghi đè lịch mới.
-        const TSA02_SCHEDULE_VERSION = 'TSA02_2607_V2';
+        const TSA02_SCHEDULE_VERSION = 'TSA02_2607_V3';
         const applyLatestTsa02Schedule = () => {
             const versionKey = 'IZ_TSA02_SCHEDULE_VERSION';
 
